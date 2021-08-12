@@ -1459,6 +1459,22 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{"model":"App\\\\Models\\\\Tag","table":"tags","type":"belongsToMany","column":"id","key":"id","label":"name","pivot_table":"taggables","pivot":"1","taggable":"on"}',
                 'order' => 11,
             ),
+            90 => 
+            array (
+                'id' => 99,
+                'data_type_id' => 12,
+                'field' => 'audio_belongstomany_tag_relationship',
+                'type' => 'relationship',
+                'display_name' => 'tags',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '{"model":"App\\\\Models\\\\Tag","table":"tags","type":"belongsToMany","column":"id","key":"id","label":"name","pivot_table":"taggables","pivot":"1","taggable":"on"}',
+                'order' => 11,
+            ),
         ));
         
         

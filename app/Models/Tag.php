@@ -15,6 +15,14 @@ class Tag extends Model
     {
         return $this->morphedByMany(Video::class, 'taggable');
     }
+    public function audios()
+    {
+        return $this->morphedByMany(Audio::class, 'taggable');
+    }
+    public function articles()
+    {
+        return $this->morphedByMany(Article::class, 'taggable');
+    }
 
     /* 
         get class name at runtime :

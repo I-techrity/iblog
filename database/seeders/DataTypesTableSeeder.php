@@ -93,24 +93,6 @@ class DataTypesTableSeeder extends Seeder
             ),
             4 => 
             array (
-                'id' => 5,
-                'name' => 'categories',
-                'slug' => 'categories',
-                'display_name_singular' => 'Category',
-                'display_name_plural' => 'Categories',
-                'icon' => 'voyager-categories',
-                'model_name' => 'App\\Models\\Category',
-                'policy_name' => NULL,
-                'controller' => NULL,
-                'description' => NULL,
-                'generate_permissions' => 1,
-                'server_side' => 0,
-                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null}',
-                'created_at' => '2021-08-09 13:10:06',
-                'updated_at' => '2021-08-09 13:10:06',
-            ),
-            5 => 
-            array (
                 'id' => 7,
                 'name' => 'clients',
                 'slug' => 'clients',
@@ -127,7 +109,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-08-09 13:11:08',
                 'updated_at' => '2021-08-09 13:11:25',
             ),
-            6 => 
+            5 => 
             array (
                 'id' => 8,
                 'name' => 'projects',
@@ -145,7 +127,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-08-09 13:12:47',
                 'updated_at' => '2021-08-09 13:16:12',
             ),
-            7 => 
+            6 => 
             array (
                 'id' => 9,
                 'name' => 'articles',
@@ -162,6 +144,42 @@ class DataTypesTableSeeder extends Seeder
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
                 'created_at' => '2021-08-09 13:31:24',
                 'updated_at' => '2021-08-09 13:43:20',
+            ),
+            7 => 
+            array (
+                'id' => 10,
+                'name' => 'categories',
+                'slug' => 'categories',
+                'display_name_singular' => 'Category',
+                'display_name_plural' => 'Categories',
+                'icon' => 'voyager-categories',
+                'model_name' => 'App\\Models\\Category',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null}',
+                'created_at' => '2021-08-12 09:34:22',
+                'updated_at' => '2021-08-12 09:34:22',
+            ),
+            8 => 
+            array (
+                'id' => 11,
+                'name' => 'tags',
+                'slug' => 'tags',
+                'display_name_singular' => 'Tag',
+                'display_name_plural' => 'Tags',
+                'icon' => NULL,
+                'model_name' => 'App\\Models\\Tag',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null}',
+                'created_at' => '2021-08-12 09:34:41',
+                'updated_at' => '2021-08-12 09:34:41',
             ),
         ));
         

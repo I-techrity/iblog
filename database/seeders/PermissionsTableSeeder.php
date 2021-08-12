@@ -269,53 +269,13 @@ class PermissionsTableSeeder extends Seeder
             ),
             31 => 
             array (
-                'id' => 32,
-                'key' => 'browse_categories',
-                'table_name' => 'categories',
-                'created_at' => '2021-08-09 13:10:06',
-                'updated_at' => '2021-08-09 13:10:06',
-            ),
-            32 => 
-            array (
-                'id' => 33,
-                'key' => 'read_categories',
-                'table_name' => 'categories',
-                'created_at' => '2021-08-09 13:10:06',
-                'updated_at' => '2021-08-09 13:10:06',
-            ),
-            33 => 
-            array (
-                'id' => 34,
-                'key' => 'edit_categories',
-                'table_name' => 'categories',
-                'created_at' => '2021-08-09 13:10:06',
-                'updated_at' => '2021-08-09 13:10:06',
-            ),
-            34 => 
-            array (
-                'id' => 35,
-                'key' => 'add_categories',
-                'table_name' => 'categories',
-                'created_at' => '2021-08-09 13:10:06',
-                'updated_at' => '2021-08-09 13:10:06',
-            ),
-            35 => 
-            array (
-                'id' => 36,
-                'key' => 'delete_categories',
-                'table_name' => 'categories',
-                'created_at' => '2021-08-09 13:10:06',
-                'updated_at' => '2021-08-09 13:10:06',
-            ),
-            36 => 
-            array (
                 'id' => 37,
                 'key' => 'browse_clients',
                 'table_name' => 'clients',
                 'created_at' => '2021-08-09 13:11:08',
                 'updated_at' => '2021-08-09 13:11:08',
             ),
-            37 => 
+            32 => 
             array (
                 'id' => 38,
                 'key' => 'read_clients',
@@ -323,7 +283,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2021-08-09 13:11:08',
                 'updated_at' => '2021-08-09 13:11:08',
             ),
-            38 => 
+            33 => 
             array (
                 'id' => 39,
                 'key' => 'edit_clients',
@@ -331,7 +291,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2021-08-09 13:11:08',
                 'updated_at' => '2021-08-09 13:11:08',
             ),
-            39 => 
+            34 => 
             array (
                 'id' => 40,
                 'key' => 'add_clients',
@@ -339,7 +299,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2021-08-09 13:11:08',
                 'updated_at' => '2021-08-09 13:11:08',
             ),
-            40 => 
+            35 => 
             array (
                 'id' => 41,
                 'key' => 'delete_clients',
@@ -347,7 +307,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2021-08-09 13:11:08',
                 'updated_at' => '2021-08-09 13:11:08',
             ),
-            41 => 
+            36 => 
             array (
                 'id' => 42,
                 'key' => 'browse_projects',
@@ -355,7 +315,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2021-08-09 13:12:47',
                 'updated_at' => '2021-08-09 13:12:47',
             ),
-            42 => 
+            37 => 
             array (
                 'id' => 43,
                 'key' => 'read_projects',
@@ -363,7 +323,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2021-08-09 13:12:47',
                 'updated_at' => '2021-08-09 13:12:47',
             ),
-            43 => 
+            38 => 
             array (
                 'id' => 44,
                 'key' => 'edit_projects',
@@ -371,7 +331,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2021-08-09 13:12:47',
                 'updated_at' => '2021-08-09 13:12:47',
             ),
-            44 => 
+            39 => 
             array (
                 'id' => 45,
                 'key' => 'add_projects',
@@ -379,7 +339,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2021-08-09 13:12:47',
                 'updated_at' => '2021-08-09 13:12:47',
             ),
-            45 => 
+            40 => 
             array (
                 'id' => 46,
                 'key' => 'delete_projects',
@@ -387,7 +347,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2021-08-09 13:12:47',
                 'updated_at' => '2021-08-09 13:12:47',
             ),
-            46 => 
+            41 => 
             array (
                 'id' => 47,
                 'key' => 'browse_articles',
@@ -395,7 +355,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2021-08-09 13:31:24',
                 'updated_at' => '2021-08-09 13:31:24',
             ),
-            47 => 
+            42 => 
             array (
                 'id' => 48,
                 'key' => 'read_articles',
@@ -403,7 +363,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2021-08-09 13:31:24',
                 'updated_at' => '2021-08-09 13:31:24',
             ),
-            48 => 
+            43 => 
             array (
                 'id' => 49,
                 'key' => 'edit_articles',
@@ -411,7 +371,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2021-08-09 13:31:24',
                 'updated_at' => '2021-08-09 13:31:24',
             ),
-            49 => 
+            44 => 
             array (
                 'id' => 50,
                 'key' => 'add_articles',
@@ -419,13 +379,93 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2021-08-09 13:31:24',
                 'updated_at' => '2021-08-09 13:31:24',
             ),
-            50 => 
+            45 => 
             array (
                 'id' => 51,
                 'key' => 'delete_articles',
                 'table_name' => 'articles',
                 'created_at' => '2021-08-09 13:31:24',
                 'updated_at' => '2021-08-09 13:31:24',
+            ),
+            46 => 
+            array (
+                'id' => 52,
+                'key' => 'browse_categories',
+                'table_name' => 'categories',
+                'created_at' => '2021-08-12 09:34:22',
+                'updated_at' => '2021-08-12 09:34:22',
+            ),
+            47 => 
+            array (
+                'id' => 53,
+                'key' => 'read_categories',
+                'table_name' => 'categories',
+                'created_at' => '2021-08-12 09:34:22',
+                'updated_at' => '2021-08-12 09:34:22',
+            ),
+            48 => 
+            array (
+                'id' => 54,
+                'key' => 'edit_categories',
+                'table_name' => 'categories',
+                'created_at' => '2021-08-12 09:34:22',
+                'updated_at' => '2021-08-12 09:34:22',
+            ),
+            49 => 
+            array (
+                'id' => 55,
+                'key' => 'add_categories',
+                'table_name' => 'categories',
+                'created_at' => '2021-08-12 09:34:22',
+                'updated_at' => '2021-08-12 09:34:22',
+            ),
+            50 => 
+            array (
+                'id' => 56,
+                'key' => 'delete_categories',
+                'table_name' => 'categories',
+                'created_at' => '2021-08-12 09:34:22',
+                'updated_at' => '2021-08-12 09:34:22',
+            ),
+            51 => 
+            array (
+                'id' => 57,
+                'key' => 'browse_tags',
+                'table_name' => 'tags',
+                'created_at' => '2021-08-12 09:34:41',
+                'updated_at' => '2021-08-12 09:34:41',
+            ),
+            52 => 
+            array (
+                'id' => 58,
+                'key' => 'read_tags',
+                'table_name' => 'tags',
+                'created_at' => '2021-08-12 09:34:41',
+                'updated_at' => '2021-08-12 09:34:41',
+            ),
+            53 => 
+            array (
+                'id' => 59,
+                'key' => 'edit_tags',
+                'table_name' => 'tags',
+                'created_at' => '2021-08-12 09:34:41',
+                'updated_at' => '2021-08-12 09:34:41',
+            ),
+            54 => 
+            array (
+                'id' => 60,
+                'key' => 'add_tags',
+                'table_name' => 'tags',
+                'created_at' => '2021-08-12 09:34:41',
+                'updated_at' => '2021-08-12 09:34:41',
+            ),
+            55 => 
+            array (
+                'id' => 61,
+                'key' => 'delete_tags',
+                'table_name' => 'tags',
+                'created_at' => '2021-08-12 09:34:41',
+                'updated_at' => '2021-08-12 09:34:41',
             ),
         ));
         

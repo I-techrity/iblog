@@ -91,7 +91,7 @@ class VoyagerBaseController extends BaseVoyagerBaseController
                     'content'         => $content,
                     'name'           => Str::singular($row->details->pivot_table),
                     'table'           => $row->details->pivot_table,
-                    'foreignPivotKey' => $row->details->foreign_pivot_key ?? null,
+                    'foreignPivotKey' => $row->details->foreign_pivot_key ?? Str::singular($row->details->pivot_table).'_id',
                     'relatedPivotKey' => $row->details->related_pivot_key ?? null,
                     'parentKey'       => $row->details->parent_key ?? null,
                     'relatedKey'      => $row->details->key,

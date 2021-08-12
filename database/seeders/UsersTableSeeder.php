@@ -22,16 +22,16 @@ class UsersTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
-                'role_id' => 1,
-                'name' => 'super',
-                'email' => 'super@i-techrity.com',
+                'role_id' => 2,
+                'name' => 'member',
+                'email' => 'member@iblog.test',
                 'avatar' => 'users/default.png',
                 'email_verified_at' => NULL,
                 'password' => '$2y$10$GGJsZjvMFOYdyx1P8H99m.7cZAgOE7Zkksk3QuHih5RAIQDpzyhdG',
                 'remember_token' => NULL,
-                'settings' => NULL,
+                'settings' => '{"locale":"en"}',
                 'created_at' => '2021-08-09 12:39:49',
-                'updated_at' => '2021-08-09 12:39:49',
+                'updated_at' => '2021-08-12 15:37:39',
             ),
             1 => 
             array (

@@ -30,10 +30,10 @@ class RolesTableSeeder extends Seeder
             1 => 
             array (
                 'id' => 2,
-                'name' => 'user',
-                'display_name' => 'Normal User',
+                'name' => 'member',
+                'display_name' => 'Iblog Member',
                 'created_at' => '2021-08-09 12:24:11',
-                'updated_at' => '2021-08-09 12:24:11',
+                'updated_at' => '2021-08-12 15:37:48',
             ),
         ));
         

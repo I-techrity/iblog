@@ -75,60 +75,6 @@ class DataTypesTableSeeder extends Seeder
             ),
             3 => 
             array (
-                'id' => 4,
-                'name' => 'teams',
-                'slug' => 'team',
-                'display_name_singular' => 'Team',
-                'display_name_plural' => 'Team',
-                'icon' => 'voyager-group',
-                'model_name' => 'App\\Models\\Team',
-                'policy_name' => NULL,
-                'controller' => NULL,
-                'description' => NULL,
-                'generate_permissions' => 1,
-                'server_side' => 0,
-                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
-                'created_at' => '2021-08-09 12:51:05',
-                'updated_at' => '2021-08-09 12:51:50',
-            ),
-            4 => 
-            array (
-                'id' => 7,
-                'name' => 'clients',
-                'slug' => 'clients',
-                'display_name_singular' => 'Client',
-                'display_name_plural' => 'Clients',
-                'icon' => 'voyager-user',
-                'model_name' => 'App\\Models\\Client',
-                'policy_name' => NULL,
-                'controller' => NULL,
-                'description' => NULL,
-                'generate_permissions' => 1,
-                'server_side' => 0,
-                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
-                'created_at' => '2021-08-09 13:11:08',
-                'updated_at' => '2021-08-09 13:11:25',
-            ),
-            5 => 
-            array (
-                'id' => 8,
-                'name' => 'projects',
-                'slug' => 'projects',
-                'display_name_singular' => 'Project',
-                'display_name_plural' => 'Projects',
-                'icon' => 'voyager-company',
-                'model_name' => 'App\\Models\\Project',
-                'policy_name' => NULL,
-                'controller' => NULL,
-                'description' => NULL,
-                'generate_permissions' => 1,
-                'server_side' => 0,
-                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
-                'created_at' => '2021-08-09 13:12:47',
-                'updated_at' => '2021-08-09 13:16:12',
-            ),
-            6 => 
-            array (
                 'id' => 9,
                 'name' => 'articles',
                 'slug' => 'articles',
@@ -143,9 +89,9 @@ class DataTypesTableSeeder extends Seeder
                 'server_side' => 0,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
                 'created_at' => '2021-08-09 13:31:24',
-                'updated_at' => '2021-08-12 11:14:52',
+                'updated_at' => '2021-08-12 15:33:52',
             ),
-            7 => 
+            4 => 
             array (
                 'id' => 10,
                 'name' => 'categories',
@@ -163,7 +109,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-08-12 09:34:22',
                 'updated_at' => '2021-08-12 09:34:22',
             ),
-            8 => 
+            5 => 
             array (
                 'id' => 11,
                 'name' => 'tags',
@@ -181,7 +127,7 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2021-08-12 09:34:41',
                 'updated_at' => '2021-08-12 09:34:41',
             ),
-            9 => 
+            6 => 
             array (
                 'id' => 12,
                 'name' => 'audio',
@@ -197,9 +143,9 @@ class DataTypesTableSeeder extends Seeder
                 'server_side' => 0,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
                 'created_at' => '2021-08-12 10:13:17',
-                'updated_at' => '2021-08-12 10:54:49',
+                'updated_at' => '2021-08-12 15:35:11',
             ),
-            10 => 
+            7 => 
             array (
                 'id' => 13,
                 'name' => 'videos',
@@ -215,7 +161,7 @@ class DataTypesTableSeeder extends Seeder
                 'server_side' => 0,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
                 'created_at' => '2021-08-12 10:14:11',
-                'updated_at' => '2021-08-12 11:23:52',
+                'updated_at' => '2021-08-12 15:35:42',
             ),
         ));
         

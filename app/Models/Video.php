@@ -18,7 +18,10 @@ class Video extends Model
     {
         return $this->morphToMany(Tag::class, 'taggable');
     }
-
+    public function categories()
+    {
+        return $this->morphToMany(Category::class, 'categorizable');
+    }
     protected static function boot()
     {
         parent::boot();

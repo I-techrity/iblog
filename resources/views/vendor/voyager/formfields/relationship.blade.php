@@ -125,7 +125,7 @@
         @php
             $relationshipData = (isset($data)) ? $data : $dataTypeContent;
             $selected_values = isset($relationshipData) ? $relationshipData->morphToMany($options->model,
-            Str::singular($options->pivot_table) , $options->pivot_table, $options->foreign_pivot_key ?? 'taggable_id',
+            Str::singular($options->pivot_table) , $options->pivot_table, $options->foreign_pivot_key ?? Str::singular($options->pivot_table).'_id',
             $options->related_pivot_key ?? null, $options->parent_key ?? null, $options->key)->get()->map(function ($item, $key) use
             ($options) {
             return $item->{$options->label};
@@ -174,7 +174,7 @@
                     @php
                         $relationshipData = (isset($data)) ? $data : $dataTypeContent;
                         $selected_values = isset($relationshipData) ? $relationshipData->morphToMany($options->model,
-                        Str::singular($options->pivot_table) , $options->pivot_table, $options->foreign_pivot_key ?? 'taggable_id',
+                        Str::singular($options->pivot_table) , $options->pivot_table, $options->foreign_pivot_key ?? Str::singular($options->pivot_table).'_id',
                         $options->related_pivot_key ?? null, $options->parent_key ?? null, $options->key)->get()->map(function ($item, $key)
                             use ($options) {
                                 return $item->{$options->key};

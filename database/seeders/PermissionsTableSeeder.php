@@ -467,6 +467,86 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2021-08-12 09:34:41',
                 'updated_at' => '2021-08-12 09:34:41',
             ),
+            56 => 
+            array (
+                'id' => 62,
+                'key' => 'browse_audio',
+                'table_name' => 'audio',
+                'created_at' => '2021-08-12 10:13:18',
+                'updated_at' => '2021-08-12 10:13:18',
+            ),
+            57 => 
+            array (
+                'id' => 63,
+                'key' => 'read_audio',
+                'table_name' => 'audio',
+                'created_at' => '2021-08-12 10:13:18',
+                'updated_at' => '2021-08-12 10:13:18',
+            ),
+            58 => 
+            array (
+                'id' => 64,
+                'key' => 'edit_audio',
+                'table_name' => 'audio',
+                'created_at' => '2021-08-12 10:13:18',
+                'updated_at' => '2021-08-12 10:13:18',
+            ),
+            59 => 
+            array (
+                'id' => 65,
+                'key' => 'add_audio',
+                'table_name' => 'audio',
+                'created_at' => '2021-08-12 10:13:18',
+                'updated_at' => '2021-08-12 10:13:18',
+            ),
+            60 => 
+            array (
+                'id' => 66,
+                'key' => 'delete_audio',
+                'table_name' => 'audio',
+                'created_at' => '2021-08-12 10:13:18',
+                'updated_at' => '2021-08-12 10:13:18',
+            ),
+            61 => 
+            array (
+                'id' => 67,
+                'key' => 'browse_videos',
+                'table_name' => 'videos',
+                'created_at' => '2021-08-12 10:14:11',
+                'updated_at' => '2021-08-12 10:14:11',
+            ),
+            62 => 
+            array (
+                'id' => 68,
+                'key' => 'read_videos',
+                'table_name' => 'videos',
+                'created_at' => '2021-08-12 10:14:11',
+                'updated_at' => '2021-08-12 10:14:11',
+            ),
+            63 => 
+            array (
+                'id' => 69,
+                'key' => 'edit_videos',
+                'table_name' => 'videos',
+                'created_at' => '2021-08-12 10:14:11',
+                'updated_at' => '2021-08-12 10:14:11',
+            ),
+            64 => 
+            array (
+                'id' => 70,
+                'key' => 'add_videos',
+                'table_name' => 'videos',
+                'created_at' => '2021-08-12 10:14:11',
+                'updated_at' => '2021-08-12 10:14:11',
+            ),
+            65 => 
+            array (
+                'id' => 71,
+                'key' => 'delete_videos',
+                'table_name' => 'videos',
+                'created_at' => '2021-08-12 10:14:11',
+                'updated_at' => '2021-08-12 10:14:11',
+            ),
         ));
         
         

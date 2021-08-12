@@ -52,8 +52,8 @@ class User extends \TCG\Voyager\Models\User
     {
         return $this->belongsTo(Video::class);
     }
-    // public function posts()
-    // {
-    //     return $this->articles()->union($this->audios())->union($this->videos());
-    // }
+    public function posts()
+    {
+        return $this->articles()->union($this->audios())->union($this->videos());
+    }
 }

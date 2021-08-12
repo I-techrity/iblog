@@ -869,22 +869,6 @@ class DataRowsTableSeeder extends Seeder
             ),
             53 => 
             array (
-                'id' => 60,
-                'data_type_id' => 9,
-                'field' => 'file',
-                'type' => 'file',
-                'display_name' => 'File',
-                'required' => 0,
-                'browse' => 1,
-                'read' => 1,
-                'edit' => 1,
-                'add' => 1,
-                'delete' => 1,
-                'details' => '{}',
-                'order' => 7,
-            ),
-            54 => 
-            array (
                 'id' => 61,
                 'data_type_id' => 9,
                 'field' => 'slug',
@@ -899,23 +883,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{}',
                 'order' => 8,
             ),
-            55 => 
-            array (
-                'id' => 62,
-                'data_type_id' => 9,
-                'field' => 'featured',
-                'type' => 'checkbox',
-                'display_name' => 'Featured',
-                'required' => 1,
-                'browse' => 1,
-                'read' => 1,
-                'edit' => 1,
-                'add' => 1,
-                'delete' => 0,
-                'details' => '{}',
-                'order' => 9,
-            ),
-            56 => 
+            54 => 
             array (
                 'id' => 63,
                 'data_type_id' => 9,
@@ -931,7 +899,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{}',
                 'order' => 10,
             ),
-            57 => 
+            55 => 
             array (
                 'id' => 64,
                 'data_type_id' => 9,
@@ -947,13 +915,13 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{}',
                 'order' => 11,
             ),
-            58 => 
+            56 => 
             array (
                 'id' => 65,
                 'data_type_id' => 9,
                 'field' => 'article_belongsto_user_relationship',
                 'type' => 'relationship',
-                'display_name' => 'user',
+                'display_name' => 'owner',
                 'required' => 1,
                 'browse' => 1,
                 'read' => 1,
@@ -963,7 +931,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{"model":"App\\\\Models\\\\User","table":"users","type":"belongsTo","column":"user_id","key":"id","label":"name","pivot_table":"articles","pivot":"0","taggable":"0"}',
                 'order' => 12,
             ),
-            59 => 
+            57 => 
             array (
                 'id' => 66,
                 'data_type_id' => 10,
@@ -979,7 +947,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{}',
                 'order' => 1,
             ),
-            60 => 
+            58 => 
             array (
                 'id' => 67,
                 'data_type_id' => 10,
@@ -995,7 +963,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{}',
                 'order' => 2,
             ),
-            61 => 
+            59 => 
             array (
                 'id' => 68,
                 'data_type_id' => 10,
@@ -1011,7 +979,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{}',
                 'order' => 3,
             ),
-            62 => 
+            60 => 
             array (
                 'id' => 69,
                 'data_type_id' => 10,
@@ -1027,7 +995,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{}',
                 'order' => 4,
             ),
-            63 => 
+            61 => 
             array (
                 'id' => 70,
                 'data_type_id' => 10,
@@ -1043,7 +1011,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{}',
                 'order' => 5,
             ),
-            64 => 
+            62 => 
             array (
                 'id' => 71,
                 'data_type_id' => 11,
@@ -1059,7 +1027,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{}',
                 'order' => 1,
             ),
-            65 => 
+            63 => 
             array (
                 'id' => 72,
                 'data_type_id' => 11,
@@ -1075,7 +1043,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{}',
                 'order' => 2,
             ),
-            66 => 
+            64 => 
             array (
                 'id' => 73,
                 'data_type_id' => 11,
@@ -1091,7 +1059,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{}',
                 'order' => 3,
             ),
-            67 => 
+            65 => 
             array (
                 'id' => 74,
                 'data_type_id' => 11,
@@ -1107,7 +1075,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{}',
                 'order' => 4,
             ),
-            68 => 
+            66 => 
             array (
                 'id' => 75,
                 'data_type_id' => 11,
@@ -1122,6 +1090,342 @@ class DataRowsTableSeeder extends Seeder
                 'delete' => 0,
                 'details' => '{}',
                 'order' => 5,
+            ),
+            67 => 
+            array (
+                'id' => 76,
+                'data_type_id' => 9,
+                'field' => 'cover',
+                'type' => 'text',
+                'display_name' => 'Cover',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '{}',
+                'order' => 4,
+            ),
+            68 => 
+            array (
+                'id' => 77,
+                'data_type_id' => 12,
+                'field' => 'id',
+                'type' => 'text',
+                'display_name' => 'Id',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '{}',
+                'order' => 1,
+            ),
+            69 => 
+            array (
+                'id' => 78,
+                'data_type_id' => 12,
+                'field' => 'title',
+                'type' => 'text',
+                'display_name' => 'Title',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{}',
+                'order' => 2,
+            ),
+            70 => 
+            array (
+                'id' => 79,
+                'data_type_id' => 12,
+                'field' => 'slug',
+                'type' => 'text',
+                'display_name' => 'Slug',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '{}',
+                'order' => 3,
+            ),
+            71 => 
+            array (
+                'id' => 80,
+                'data_type_id' => 12,
+                'field' => 'cover',
+                'type' => 'text',
+                'display_name' => 'Cover',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{}',
+                'order' => 4,
+            ),
+            72 => 
+            array (
+                'id' => 81,
+                'data_type_id' => 12,
+                'field' => 'user_id',
+                'type' => 'text',
+                'display_name' => 'User Id',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '{}',
+                'order' => 5,
+            ),
+            73 => 
+            array (
+                'id' => 82,
+                'data_type_id' => 12,
+                'field' => 'file',
+                'type' => 'text',
+                'display_name' => 'File',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '{}',
+                'order' => 6,
+            ),
+            74 => 
+            array (
+                'id' => 83,
+                'data_type_id' => 12,
+                'field' => 'desc',
+                'type' => 'text',
+                'display_name' => 'Desc',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '{}',
+                'order' => 7,
+            ),
+            75 => 
+            array (
+                'id' => 84,
+                'data_type_id' => 12,
+                'field' => 'created_at',
+                'type' => 'timestamp',
+                'display_name' => 'Created At',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '{}',
+                'order' => 8,
+            ),
+            76 => 
+            array (
+                'id' => 85,
+                'data_type_id' => 12,
+                'field' => 'updated_at',
+                'type' => 'timestamp',
+                'display_name' => 'Updated At',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '{}',
+                'order' => 9,
+            ),
+            77 => 
+            array (
+                'id' => 86,
+                'data_type_id' => 13,
+                'field' => 'id',
+                'type' => 'text',
+                'display_name' => 'Id',
+                'required' => 1,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '{}',
+                'order' => 1,
+            ),
+            78 => 
+            array (
+                'id' => 87,
+                'data_type_id' => 13,
+                'field' => 'title',
+                'type' => 'text',
+                'display_name' => 'Title',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{}',
+                'order' => 2,
+            ),
+            79 => 
+            array (
+                'id' => 88,
+                'data_type_id' => 13,
+                'field' => 'slug',
+                'type' => 'text',
+                'display_name' => 'Slug',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '{}',
+                'order' => 3,
+            ),
+            80 => 
+            array (
+                'id' => 89,
+                'data_type_id' => 13,
+                'field' => 'cover',
+                'type' => 'text',
+                'display_name' => 'Cover',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '{}',
+                'order' => 4,
+            ),
+            81 => 
+            array (
+                'id' => 90,
+                'data_type_id' => 13,
+                'field' => 'user_id',
+                'type' => 'text',
+                'display_name' => 'User Id',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '{}',
+                'order' => 5,
+            ),
+            82 => 
+            array (
+                'id' => 91,
+                'data_type_id' => 13,
+                'field' => 'file',
+                'type' => 'text',
+                'display_name' => 'File',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{}',
+                'order' => 6,
+            ),
+            83 => 
+            array (
+                'id' => 92,
+                'data_type_id' => 13,
+                'field' => 'desc',
+                'type' => 'text',
+                'display_name' => 'Desc',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 0,
+                'details' => '{}',
+                'order' => 7,
+            ),
+            84 => 
+            array (
+                'id' => 93,
+                'data_type_id' => 13,
+                'field' => 'created_at',
+                'type' => 'timestamp',
+                'display_name' => 'Created At',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '{}',
+                'order' => 8,
+            ),
+            85 => 
+            array (
+                'id' => 94,
+                'data_type_id' => 13,
+                'field' => 'updated_at',
+                'type' => 'timestamp',
+                'display_name' => 'Updated At',
+                'required' => 0,
+                'browse' => 0,
+                'read' => 0,
+                'edit' => 0,
+                'add' => 0,
+                'delete' => 0,
+                'details' => '{}',
+                'order' => 9,
+            ),
+            86 => 
+            array (
+                'id' => 95,
+                'data_type_id' => 12,
+                'field' => 'audio_belongsto_user_relationship',
+                'type' => 'relationship',
+                'display_name' => 'users',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '{"model":"App\\\\Models\\\\User","table":"users","type":"belongsTo","column":"user_id","key":"id","label":"name","pivot_table":"articles","pivot":"0","taggable":"0"}',
+                'order' => 10,
+            ),
+            87 => 
+            array (
+                'id' => 96,
+                'data_type_id' => 13,
+                'field' => 'video_belongsto_user_relationship',
+                'type' => 'relationship',
+                'display_name' => 'users',
+                'required' => 1,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '{"model":"App\\\\Models\\\\User","table":"users","type":"belongsTo","column":"user_id","key":"id","label":"name","pivot_table":"articles","pivot":"0","taggable":"0"}',
+                'order' => 10,
             ),
         ));
         

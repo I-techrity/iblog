@@ -143,7 +143,7 @@ class DataTypesTableSeeder extends Seeder
                 'server_side' => 0,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
                 'created_at' => '2021-08-09 13:31:24',
-                'updated_at' => '2021-08-09 13:43:20',
+                'updated_at' => '2021-08-12 10:12:12',
             ),
             7 => 
             array (
@@ -180,6 +180,42 @@ class DataTypesTableSeeder extends Seeder
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null}',
                 'created_at' => '2021-08-12 09:34:41',
                 'updated_at' => '2021-08-12 09:34:41',
+            ),
+            9 => 
+            array (
+                'id' => 12,
+                'name' => 'audio',
+                'slug' => 'audio',
+                'display_name_singular' => 'Audio',
+                'display_name_plural' => 'Audio',
+                'icon' => 'voyager-sound',
+                'model_name' => 'App\\Models\\Audio',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2021-08-12 10:13:17',
+                'updated_at' => '2021-08-12 10:14:53',
+            ),
+            10 => 
+            array (
+                'id' => 13,
+                'name' => 'videos',
+                'slug' => 'videos',
+                'display_name_singular' => 'Video',
+                'display_name_plural' => 'Videos',
+                'icon' => 'voyager-video',
+                'model_name' => 'App\\Models\\Video',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2021-08-12 10:14:11',
+                'updated_at' => '2021-08-12 10:15:22',
             ),
         ));
         

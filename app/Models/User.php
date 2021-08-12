@@ -40,4 +40,20 @@ class User extends \TCG\Voyager\Models\User
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function articles()
+    {
+        return $this->belongsTo(Article::class);
+    }
+    public function audios()
+    {
+        return $this->belongsTo(Audio::class);
+    }
+    public function videos()
+    {
+        return $this->belongsTo(Video::class);
+    }
+    // public function posts()
+    // {
+    //     return $this->articles()->union($this->audios())->union($this->videos());
+    // }
 }

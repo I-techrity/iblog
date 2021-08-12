@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 class Audio extends Model
 {
     use HasFactory;
+    protected $table = 'audio';
     public function owner()
     {
         return $this->belongsTo(User::class , 'user_id');
@@ -23,7 +24,6 @@ class Audio extends Model
                 $slug .= '-' . $count ;
             }
             $model->slug = $slug;
-            $model->excerpt = Str::limit( strip_tags($model->body), 120 , '...');
              if(!$model->user_i) {
                  $model->user_id = Auth::user()->id;
             } 

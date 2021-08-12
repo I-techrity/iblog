@@ -20,7 +20,7 @@ class CreateAudioTable extends Migration
             $table->string('cover')->nullable();
             $table->foreignId('user_id');
             $table->string('file');
-            $table->text('desc');
+            $table->text('desc')->nullable();
             $table->timestamps();
         });
     }

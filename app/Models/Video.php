@@ -23,7 +23,6 @@ class Video extends Model
                 $slug .= '-' . $count ;
             }
             $model->slug = $slug;
-            $model->excerpt = Str::replace( '&nbsp;' , ' ' , Str::limit( strip_tags($model->body), 120 , '...'));
              if(!$model->user_i) {
                  $model->user_id = Auth::user()->id;
             } 

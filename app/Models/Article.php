@@ -24,10 +24,13 @@ class Article extends Model
         parent::boot();
         static::saving(function ($model) {
             $slug = Str::slug($model->title , '-' , null);
-            if($count = $model->where('slug' , $slug)->get()->count()) {
-                $slug .= '-' . $count ;
+            if($model->slug != $slug) {
+            
+                if($count = $model->where('slug' , $slug)->get()->count()) {
+                    $slug .= '-' . $count ;
+                }
+                $model->slug = $slug;
             }
-            $model->slug = $slug;
             $model->excerpt = Str::limit( strip_tags($model->body), 120 , '...');
              if(!$model->user_i) {
                  $model->user_id = Auth::user()->id;

@@ -14,6 +14,11 @@ class Video extends Model
         return $this->belongsTo(User::class , 'user_id');
     }
 
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
+
     protected static function boot()
     {
         parent::boot();

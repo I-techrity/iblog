@@ -42,18 +42,22 @@ class User extends \TCG\Voyager\Models\User
     ];
     public function articles()
     {
-        return $this->belongsTo(Article::class);
+        return $this->hasMany(Article::class);
     }
     public function audios()
     {
-        return $this->belongsTo(Audio::class);
+        return $this->hasMany(Audio::class);
     }
     public function videos()
     {
-        return $this->belongsTo(Video::class);
+        return $this->hasMany(Video::class);
     }
-    public function posts()
-    {
-        return $this->articles()->union($this->audios())->union($this->videos());
-    }
+    // public function posts()
+    // {
+        
+    //     return $this->videos()
+    //                 ->union($this->articles())
+    //                 ->union($this->audios());
+                    
+    // }
 }

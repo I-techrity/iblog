@@ -8,18 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
-    public function videos()
+    
+    public function commentable()
     {
-        return $this->morphedByMany(Video::class, 'commentable');
+        return $this->morphTo();
     }
-    public function audios()
-    {
-        return $this->morphedByMany(Audio::class, 'commentable');
-    }
-    public function articles()
-    {
-        return $this->morphedByMany(Article::class, 'commentable');
-    }
+
     public function owner()
     {
         return $this->belongsTo(User::class , 'user_id');

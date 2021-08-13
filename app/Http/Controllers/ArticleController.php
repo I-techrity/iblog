@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class ArticleController extends Controller
 {
@@ -47,6 +49,15 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         //
+        
+        if( Auth::id() != $article->owner->id  && (Cookie::get('article') != $article->id)){
+            $article->increment('clicks') ;
+            Cookie::queue('article', $article->id, 0.5); // no clikcs for 30seconds
+            if(Cookie::get('article')) {
+                $article->save();
+            }
+        }
+
     }
 
     /**

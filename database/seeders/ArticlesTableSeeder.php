@@ -30,7 +30,7 @@ class ArticlesTableSeeder extends Seeder
                 'body' => '<p>Enim ut est esse c <em><strong>Enim ut est esse c</strong></em></p>',
                 'excerpt' => 'Enim ut est esse c Enim ut est esse c',
                 'created_at' => '2021-08-12 10:37:50',
-                'updated_at' => '2021-08-12 10:37:50',
+                'updated_at' => '2021-08-13 15:59:54',
             ),
             1 => 
             array (
@@ -46,6 +46,32 @@ class ArticlesTableSeeder extends Seeder
 Enim ut est esse c',
                 'created_at' => '2021-08-12 10:38:43',
                 'updated_at' => '2021-08-12 10:39:53',
+            ),
+            2 => 
+            array (
+                'id' => 4,
+                'title' => 'dafedafa e aea a ea',
+                'slug' => 'dafedafa-e-aea-a-ea',
+                'cover' => 'articles\\August2021\\yvvCu421SZAeOzrhh6gR.jpg',
+                'image' => 'articles\\August2021\\1jDffQfyUyswcDr9ARSF.jpg',
+                'user_id' => 2,
+                'body' => '<p>dea eaf ea fea fea fe</p>',
+                'excerpt' => 'dea eaf ea fea fea fe',
+                'created_at' => '2021-08-12 16:13:19',
+                'updated_at' => '2021-08-13 15:38:53',
+            ),
+            3 => 
+            array (
+                'id' => 5,
+                'title' => 'member article',
+                'slug' => 'member-article',
+                'cover' => 'articles\\August2021\\ahKSdFC97ca9offWZ5tx.png',
+                'image' => 'articles\\August2021\\b0sXjRWUs3Io1Kf7RuWC.jpg',
+                'user_id' => 1,
+                'body' => '<p>member <strong>articles none</strong></p>',
+                'excerpt' => 'member articles none',
+                'created_at' => '2021-08-13 16:04:58',
+                'updated_at' => '2021-08-13 16:06:58',
             ),
         ));
         

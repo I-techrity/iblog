@@ -21,6 +21,8 @@ class CreateAudioTable extends Migration
             $table->foreignId('user_id');
             $table->string('file');
             $table->text('desc')->nullable();
+            $table->unsignedBigInteger('clicks')->default(0);
+
             $table->timestamps();
         });
     }

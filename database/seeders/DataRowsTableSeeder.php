@@ -509,7 +509,7 @@ class DataRowsTableSeeder extends Seeder
                 'required' => 1,
                 'browse' => 1,
                 'read' => 1,
-                'edit' => 1,
+                'edit' => 0,
                 'add' => 0,
                 'delete' => 0,
                 'details' => '{"model":"App\\\\Models\\\\User","table":"users","type":"belongsTo","column":"user_id","key":"id","label":"name","pivot_table":"articles","pivot":"0","taggable":"0"}',

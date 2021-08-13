@@ -11,14 +11,14 @@ class Category extends Model
 
     public function videos()
     {
-        return $this->morphedByMany(Video::class, 'taggable');
+        return $this->morphedByMany(Video::class, 'categorizable');
     }
     public function audios()
     {
-        return $this->morphedByMany(Audio::class, 'taggable');
+        return $this->morphedByMany(Audio::class, 'categorizable');
     }
     public function articles()
     {
-        return $this->morphedByMany(Article::class, 'taggable');
+        return $this->morphedByMany(Article::class, 'categorizable');
     }
 }

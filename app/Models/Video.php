@@ -22,6 +22,10 @@ class Video extends Model
     {
         return $this->morphToMany(Category::class, 'categorizable');
     }
+    public function comments()
+    {
+        return $this->morphToMany(Comment::class, 'commentable');
+    }
     protected static function boot()
     {
         parent::boot();

@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
+use App\Models\Comment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cookie;
 
-class ArticleController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -43,30 +41,21 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article)
+    public function show(Comment $comment)
     {
         //
-        
-        if( Auth::id() != $article->owner->id  && (Cookie::get('article'.'_'.$article->id) != $article->id)){
-            $article->increment('clicks') ;
-            Cookie::queue('article'.'_'.$article->id, $article->id, 0.5); // no clikcs for 30seconds
-            if(Cookie::get('article'.'_'.$article->id)) {
-                $article->save();
-            }
-        }
-
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Article $article)
+    public function edit(Comment $comment)
     {
         //
     }
@@ -75,10 +64,10 @@ class ArticleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Article $article)
+    public function update(Request $request, Comment $comment)
     {
         //
     }
@@ -86,10 +75,10 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Article $article)
+    public function destroy(Comment $comment)
     {
         //
     }

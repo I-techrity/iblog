@@ -52,6 +52,10 @@ class User extends \TCG\Voyager\Models\User
     {
         return $this->hasMany(Video::class);
     }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
     // public function posts()
     // {
         

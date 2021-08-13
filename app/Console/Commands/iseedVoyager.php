@@ -4,14 +4,14 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class iseedAll extends Command
+class iseedVoyager extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'iseed:all';
+    protected $signature = 'iseed:voyager';
 
     /**
      * The console command description.

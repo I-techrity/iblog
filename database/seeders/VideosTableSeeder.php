@@ -28,6 +28,7 @@ class VideosTableSeeder extends Seeder
                 'user_id' => 2,
                 'file' => '[{"download_link":"videos\\\\August2021\\\\f6zUn3z9KbfWWAXsvVEF.mp4","original_name":"y2mate.com - Coolio ft LV Gangstas Paradise on the Howard Stern Show 1995_v720P.mp4"}]',
                 'desc' => 'gangster paradise',
+                'clicks' => 0,
                 'created_at' => '2021-08-12 10:53:59',
                 'updated_at' => '2021-08-12 10:53:59',
             ),

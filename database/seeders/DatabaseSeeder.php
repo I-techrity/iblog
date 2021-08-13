@@ -28,5 +28,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AudioTableSeeder::class);
         $this->call(TagsTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
+        $this->call(CommentsTableSeeder::class);
     }
 }

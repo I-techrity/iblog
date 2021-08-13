@@ -116,30 +116,45 @@
                     $relationshipData = (isset($data)) ? $data : $dataTypeContent;
                     $model = app($options->model);
 
-                    $selected_values = $model::where($options->column, '=', $relationshipData->{$options->key})->get()->map(function ($item,
-                        $key) use ($options) {
-                            return $item->{$options->label};
-                        })->all();
+                    // $selected_values = $model::where($options->column, '=', $relationshipData->{$options->key})->get()->map(function ($item,
+                    //     $key) use ($options) {
+                    //         return $item->{$options->label};
+                    //     })->all();
+
+                    $selected_items = $model::where($options->column, '=', $relationshipData->{$options->key})->get();
+                    $selected_values = $selected_items ? $selected_items->map(function ($item,
+                    $key) use ($options) {
+                        return $item->{$options->label};
+                    })->all() : array();
                 @endphp
 
                 @if($view == 'browse')
-                @php
+                {{-- @php
                     $string_values = implode(", ", $selected_values);
                     if(mb_strlen($string_values) > 25){ $string_values = mb_substr($string_values, 0, 25) . '...'; }
-                @endphp
+                @endphp --}}
                     @if(empty($selected_values))
                         <p>{{ __('voyager::generic.no_results') }}</p>
                     @else
-                        <p>{{ $string_values }}</p>
+                        @foreach($selected_items as $selected_item)
+                            <a href="{{ route('voyager.'.$options->table.'.show' ,$selected_item->{$options->key})  }}">{{ $selected_item->{$options->label} }}</a> 
+                            @if ($loop->count > 5 && $loop->iteration == 4)
+                                <br> {{ ' + ' . ($loop->count - $loop->iteration) .' other '.$options->table}}
+                                @break
+                            @endif
+                            @if (!$loop->last) | @endif 
+                        @endforeach
                     @endif
                 @else
                     @if(empty($selected_values))
                         <p>{{ __('voyager::generic.no_results') }}</p>
                     @else
-                   
                         <ul>
-                            @foreach($selected_values as $selected_value)
-                            <li>{{ $selected_value }}</li>
+                            @foreach($selected_items as $selected_item)
+                            <li>
+                                <a href="{{ route('voyager.'.$options->table.'.show' ,$selected_item->{$options->key})  }}">{{ $selected_item->{$options->label} }}</a>
+
+                            </li>
                             @endforeach
                         </ul>
                     @endif
@@ -166,98 +181,98 @@
             @endif
 
         @elseif($options->type == 'belongsToMany')
-        {{-- Many to Many polymorphic relationship extend cheat --}}
-        @if ( Str::contains($options->pivot_table , 'ables') )
-            @if(isset($view) && ($view == 'browse' || $view == 'read'))
-                @php
-                    $relationshipData = (isset($data)) ? $data : $dataTypeContent;
-                    // $selected_values = isset($relationshipData) ? $relationshipData->morphToMany($options->model,
-                    // Str::singular($options->pivot_table) , $options->pivot_table, $options->foreign_pivot_key ?? Str::singular($options->pivot_table).'_id',
-                    // $options->related_pivot_key ?? null, $options->parent_key ?? null, $options->key)->get()->map(function ($item, $key) use
-                    // ($options) {
-                    // return $item->{$options->label};
-                    // })->all() : array();
-                    $selected_items = isset($relationshipData) ? $relationshipData->morphToMany($options->model,
-                    Str::singular($options->pivot_table) , $options->pivot_table, $options->foreign_pivot_key ?? Str::singular($options->pivot_table).'_id',
-                    $options->related_pivot_key ?? null, $options->parent_key ?? null, $options->key)->get() : array();
-
-                    $selected_values = $selected_items ? $selected_items->map(function ($item, $key) use ($options) {
-                        return $item->{$options->label};
-                    })->all() : array();
-                @endphp
-
-                @if($view == 'browse')
-                    {{-- @php
-                        $string_values = implode(", ", $selected_values);
-                        if(mb_strlen($string_values) > 25){ $string_values = mb_substr($string_values, 0, 25) . '...'; }
-                    @endphp --}}
-                    @if(empty($selected_values))
-                        <p>{{ __('voyager::generic.no_results') }}</p>
-                    @else
-                        @foreach($selected_items as $selected_item)
-                            <a href="{{ route('voyager.'.$options->table.'.show' ,$selected_item->{$options->key})  }}">{{ $selected_item->{$options->label} }}</a> 
-                            @if ($loop->count > 5 && $loop->iteration == 4)
-                                   <br> {{ ' + ' . ($loop->count - $loop->iteration) .' other '.$options->table}}
-                                @break
-                            @endif
-                            @if (!$loop->last) | @endif 
-                        @endforeach
-                    @endif
-                @else
-                    @if(empty($selected_values))
-                        <p>{{ __('voyager::generic.no_results') }}</p>
-                    @else
-                        <ul>
-                            @foreach($selected_items as $selected_item)
-                            <li>
-                                <a href="{{ route('voyager.'.$options->table.'.show' ,$selected_item->{$options->key})  }}">{{ $selected_item->{$options->label} }}</a>
-
-                            </li>
-                            @endforeach
-                        </ul>
-                    @endif
-                @endif
-
-            @else
-                <select
-                    class="form-control @if(isset($options->taggable) && $options->taggable === 'on') select2-taggable @else select2-ajax @endif"
-                    name="{{ $relationshipField }}[]" multiple
-                    data-get-items-route="{{route('voyager.' . $dataType->slug.'.relation')}}" data-get-items-field="{{$row->field}}"
-                    @if(!is_null($dataTypeContent->getKey())) data-id="{{$dataTypeContent->getKey()}}" @endif
-                    data-method="{{ !is_null($dataTypeContent->getKey()) ? 'edit' : 'add' }}"
-                    @if(isset($options->taggable) && $options->taggable === 'on')
-                    data-route="{{ route('voyager.'.\Illuminate\Support\Str::slug($options->table).'.store') }}"
-                    data-label="{{$options->label}}"
-                    data-error-message="{{__('voyager::bread.error_tagging')}}"
-                    @endif
-                    @if($row->required == 1) required @endif
-                    >
-
+            {{-- Many to Many polymorphic relationship extend cheat --}}
+            @if ( Str::contains($options->pivot_table , 'ables') )
+                @if(isset($view) && ($view == 'browse' || $view == 'read'))
                     @php
                         $relationshipData = (isset($data)) ? $data : $dataTypeContent;
-                        $selected_values = isset($relationshipData) ? $relationshipData->morphToMany($options->model,
+                        // $selected_values = isset($relationshipData) ? $relationshipData->morphToMany($options->model,
+                        // Str::singular($options->pivot_table) , $options->pivot_table, $options->foreign_pivot_key ?? Str::singular($options->pivot_table).'_id',
+                        // $options->related_pivot_key ?? null, $options->parent_key ?? null, $options->key)->get()->map(function ($item, $key) use
+                        // ($options) {
+                        // return $item->{$options->label};
+                        // })->all() : array();
+                        $selected_items = isset($relationshipData) ? $relationshipData->morphToMany($options->model,
                         Str::singular($options->pivot_table) , $options->pivot_table, $options->foreign_pivot_key ?? Str::singular($options->pivot_table).'_id',
-                        $options->related_pivot_key ?? null, $options->parent_key ?? null, $options->key)->get()->map(function ($item, $key)
-                            use ($options) {
-                                return $item->{$options->key};
-                            })->all() : array();
-                        $relationshipOptions = app($options->model)->all();
-                        $selected_values = old($relationshipField, $selected_values);
+                        $options->related_pivot_key ?? null, $options->parent_key ?? null, $options->key)->get() : array();
+
+                        $selected_values = $selected_items ? $selected_items->map(function ($item, $key) use ($options) {
+                            return $item->{$options->label};
+                        })->all() : array();
                     @endphp
 
-                    @if(!$row->required)
-                        <option value="">{{__('voyager::generic.none')}}</option>
+                    @if($view == 'browse')
+                        {{-- @php
+                            $string_values = implode(", ", $selected_values);
+                            if(mb_strlen($string_values) > 25){ $string_values = mb_substr($string_values, 0, 25) . '...'; }
+                        @endphp --}}
+                        @if(empty($selected_values))
+                            <p>{{ __('voyager::generic.no_results') }}</p>
+                        @else
+                            @foreach($selected_items as $selected_item)
+                                <a href="{{ route('voyager.'.$options->table.'.show' ,$selected_item->{$options->key})  }}">{{ $selected_item->{$options->label} }}</a> 
+                                @if ($loop->count > 5 && $loop->iteration == 4)
+                                    <br> {{ ' + ' . ($loop->count - $loop->iteration) .' other '.$options->table}}
+                                    @break
+                                @endif
+                                @if (!$loop->last) | @endif 
+                            @endforeach
+                        @endif
+                    @else
+                        @if(empty($selected_values))
+                            <p>{{ __('voyager::generic.no_results') }}</p>
+                        @else
+                            <ul>
+                                @foreach($selected_items as $selected_item)
+                                <li>
+                                    <a href="{{ route('voyager.'.$options->table.'.show' ,$selected_item->{$options->key})  }}">{{ $selected_item->{$options->label} }}</a>
+
+                                </li>
+                                @endforeach
+                            </ul>
+                        @endif
                     @endif
 
-                    @foreach($relationshipOptions as $relationshipOption)
-                    <option value="{{ $relationshipOption->{$options->key} }}" @if(in_array($relationshipOption->{$options->key},
-                        $selected_values)) selected="selected" @endif>{{ $relationshipOption->{$options->label} }}</option>
-                    @endforeach
+                @else
+                    <select
+                        class="form-control @if(isset($options->taggable) && $options->taggable === 'on') select2-taggable @else select2-ajax @endif"
+                        name="{{ $relationshipField }}[]" multiple
+                        data-get-items-route="{{route('voyager.' . $dataType->slug.'.relation')}}" data-get-items-field="{{$row->field}}"
+                        @if(!is_null($dataTypeContent->getKey())) data-id="{{$dataTypeContent->getKey()}}" @endif
+                        data-method="{{ !is_null($dataTypeContent->getKey()) ? 'edit' : 'add' }}"
+                        @if(isset($options->taggable) && $options->taggable === 'on')
+                        data-route="{{ route('voyager.'.\Illuminate\Support\Str::slug($options->table).'.store') }}"
+                        data-label="{{$options->label}}"
+                        data-error-message="{{__('voyager::bread.error_tagging')}}"
+                        @endif
+                        @if($row->required == 1) required @endif
+                        >
 
-                </select>
+                        @php
+                            $relationshipData = (isset($data)) ? $data : $dataTypeContent;
+                            $selected_values = isset($relationshipData) ? $relationshipData->morphToMany($options->model,
+                            Str::singular($options->pivot_table) , $options->pivot_table, $options->foreign_pivot_key ?? Str::singular($options->pivot_table).'_id',
+                            $options->related_pivot_key ?? null, $options->parent_key ?? null, $options->key)->get()->map(function ($item, $key)
+                                use ($options) {
+                                    return $item->{$options->key};
+                                })->all() : array();
+                            $relationshipOptions = app($options->model)->all();
+                            $selected_values = old($relationshipField, $selected_values);
+                        @endphp
 
-                @endif
-            {{--END !! Many to Many polymorphic relationship extend cheat --}}
+                        @if(!$row->required)
+                            <option value="">{{__('voyager::generic.none')}}</option>
+                        @endif
+
+                        @foreach($relationshipOptions as $relationshipOption)
+                        <option value="{{ $relationshipOption->{$options->key} }}" @if(in_array($relationshipOption->{$options->key},
+                            $selected_values)) selected="selected" @endif>{{ $relationshipOption->{$options->label} }}</option>
+                        @endforeach
+
+                    </select>
+
+                    @endif
+                {{--END !! Many to Many polymorphic relationship extend cheat --}}
             @else
 
                 @if(isset($view) && ($view == 'browse' || $view == 'read'))
@@ -266,32 +281,49 @@
                     @php
                         $relationshipData = (isset($data)) ? $data : $dataTypeContent;
 
-                        $selected_values = isset($relationshipData) ? $relationshipData->belongsToMany($options->model, $options->pivot_table,
-                        $options->foreign_pivot_key ?? null, $options->related_pivot_key ?? null, $options->parent_key ?? null,
-                        $options->key)->get()->map(function ($item, $key) use ($options) {
-                        return $item->{$options->label};
+                        // $selected_values = isset($relationshipData) ? $relationshipData->belongsToMany($options->model, $options->pivot_table,
+                        // $options->foreign_pivot_key ?? null, $options->related_pivot_key ?? null, $options->parent_key ?? null,
+                        // $options->key)->get()->map(function ($item, $key) use ($options) {
+                        // return $item->{$options->label};
+                        // })->all() : array();
+                        $selected_items = isset($relationshipData) ? $relationshipData->belongsToMany($options->model,
+                        $options->pivot_table , $options->foreign_pivot_key ?? null,
+                        $options->related_pivot_key ?? null, $options->parent_key ?? null, $options->key)->get() : array();
+
+                        $selected_values = $selected_items ? $selected_items->map(function ($item, $key) use ($options) {
+                            return $item->{$options->label};
                         })->all() : array();
                     @endphp
 
                     @if($view == 'browse')
-                        @php
-                            $string_values = implode(", ", $selected_values);
-                            if(mb_strlen($string_values) > 25){ $string_values = mb_substr($string_values, 0, 25) . '...'; }
-                        @endphp
+                    {{-- @php
+                        $string_values = implode(", ", $selected_values);
+                        if(mb_strlen($string_values) > 25){ $string_values = mb_substr($string_values, 0, 25) . '...'; }
+                    @endphp --}}
                         @if(empty($selected_values))
                             <p>{{ __('voyager::generic.no_results') }}</p>
                         @else
-                            <p>{{ $string_values }}</p>
+                            @foreach($selected_items as $selected_item)
+                                <a href="{{ route('voyager.'.$options->table.'.show' ,$selected_item->{$options->key})  }}">{{ $selected_item->{$options->label} }}</a> 
+                                @if ($loop->count > 5 && $loop->iteration == 4)
+                                    <br> {{ ' + ' . ($loop->count - $loop->iteration) .' other '.$options->table}}
+                                    @break
+                                @endif
+                                @if (!$loop->last) | @endif 
+                            @endforeach
                         @endif
                     @else
                         @if(empty($selected_values))
                             <p>{{ __('voyager::generic.no_results') }}</p>
                         @else
-                        <ul>
-                            @foreach($selected_values as $selected_value)
-                            <li>{{ $selected_value }}</li>
-                            @endforeach
-                        </ul>
+                            <ul>
+                                @foreach($selected_items as $selected_item)
+                                <li>
+                                    <a href="{{ route('voyager.'.$options->table.'.show' ,$selected_item->{$options->key})  }}">{{ $selected_item->{$options->label} }}</a>
+
+                                </li>
+                                @endforeach
+                            </ul>
                         @endif
                     @endif
 

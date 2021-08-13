@@ -31,7 +31,7 @@ class Audio extends Model
                 $slug .= '-' . $count ;
             }
             $model->slug = $slug;
-             if(!$model->user_i) {
+             if(!$model->user_id) {
                  $model->user_id = Auth::user()->id;
             } 
         });

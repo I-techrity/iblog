@@ -6,18 +6,17 @@ use Illuminate\Support\Facades\Gate;
 use TCG\Voyager\Http\Controllers\VoyagerBaseController as BaseVoyagerBaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use TCG\Voyager\Events\BreadDataAdded;
 use TCG\Voyager\Facades\Voyager;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use TCG\Voyager\Events\BreadDataDeleted;
 
 class VoyagerBaseController extends BaseVoyagerBaseController
 {
-    public function __construct()
-    {
-        
-    }
+    
 
     public function index(Request $request)
     {
@@ -29,7 +28,7 @@ class VoyagerBaseController extends BaseVoyagerBaseController
 
         // Check permission
         $this->authorize('browse', app($dataType->model_name));
-
+        
         $getter = $dataType->server_side ? 'paginate' : 'get';
 
         $search = (object) ['value' => $request->get('s'), 'key' => $request->get('key'), 'filter' => $request->get('filter')];
@@ -190,8 +189,265 @@ class VoyagerBaseController extends BaseVoyagerBaseController
             'showCheckboxColumn'
         ));
     }
+
+
+        //***************************************
+    //                _____
+    //               |  __ \
+    //               | |__) |
+    //               |  _  /
+    //               | | \ \
+    //               |_|  \_\
+    //
+    //  Read an item of our Data Type B(R)EAD
+    //
+    //****************************************
+
+    public function show(Request $request, $id)
+    {
+        $slug = $this->getSlug($request);
+
+        $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
+
+        $isSoftDeleted = false;
+
+        if (strlen($dataType->model_name) != 0) {
+            $model = app($dataType->model_name);
+            $query = $model->query();
+
+            // Use withTrashed() if model uses SoftDeletes and if toggle is selected
+            if ($model && in_array(SoftDeletes::class, class_uses_recursive($model))) {
+                $query = $query->withTrashed();
+            }
+            if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope'.ucfirst($dataType->scope))) {
+                $query = $query->{$dataType->scope}();
+            }
+            $dataTypeContent = call_user_func([$query, 'findOrFail'], $id);
+            if ($dataTypeContent->deleted_at) {
+                $isSoftDeleted = true;
+            }
+        } else {
+            // If Model doest exist, get data from table name
+            $dataTypeContent = DB::table($dataType->name)->where('id', $id)->first();
+        }
+
+
+        // abort if not admin nor owner 
+        if( isset($dataTypeContent->user_id) && $dataTypeContent->user_id != Auth::id() && !Auth::user()->hasRole('admin') ) {
+            abort(404 , 'NOT FOUND!');
+        }
+
+
+        // Replace relationships' keys for labels and create READ links if a slug is provided.
+        $dataTypeContent = $this->resolveRelations($dataTypeContent, $dataType, true);
+
+        // If a column has a relationship associated with it, we do not want to show that field
+        $this->removeRelationshipField($dataType, 'read');
+
+        // Check permission
+        $this->authorize('read', $dataTypeContent);
+
+        // Check if BREAD is Translatable
+        $isModelTranslatable = is_bread_translatable($dataTypeContent);
+
+        // Eagerload Relations
+        $this->eagerLoadRelations($dataTypeContent, $dataType, 'read', $isModelTranslatable);
+
+        $view = 'voyager::bread.read';
+
+        if (view()->exists("voyager::$slug.read")) {
+            $view = "voyager::$slug.read";
+        }
+
+        return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'isSoftDeleted'));
+    }
+
+
+
+    
+    //***************************************
+    //                ______
+    //               |  ____|
+    //               | |__
+    //               |  __|
+    //               | |____
+    //               |______|
+    //
+    //  Edit an item of our Data Type BR(E)AD
+    //
+    //****************************************
+
+    public function edit(Request $request, $id)
+    {
+        $slug = $this->getSlug($request);
+
+        $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
+
+        if (strlen($dataType->model_name) != 0) {
+            $model = app($dataType->model_name);
+            $query = $model->query();
+
+            // Use withTrashed() if model uses SoftDeletes and if toggle is selected
+            if ($model && in_array(SoftDeletes::class, class_uses_recursive($model))) {
+                $query = $query->withTrashed();
+            }
+            if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope'.ucfirst($dataType->scope))) {
+                $query = $query->{$dataType->scope}();
+            }
+            $dataTypeContent = call_user_func([$query, 'findOrFail'], $id);
+        } else {
+            // If Model doest exist, get data from table name
+            $dataTypeContent = DB::table($dataType->name)->where('id', $id)->first();
+        }
+        // abort if not admin nor owner 
+        if( isset($dataTypeContent->user_id) && $dataTypeContent->user_id != Auth::id() && !Auth::user()->hasRole('admin') ) {
+            abort(404 , 'NOT FOUND!');
+        }
+
+        foreach ($dataType->editRows as $key => $row) {
+            $dataType->editRows[$key]['col_width'] = isset($row->details->width) ? $row->details->width : 100;
+        }
+
+        // If a column has a relationship associated with it, we do not want to show that field
+        $this->removeRelationshipField($dataType, 'edit');
+
+        // Check permission
+        $this->authorize('edit', $dataTypeContent);
+
+        // Check if BREAD is Translatable
+        $isModelTranslatable = is_bread_translatable($dataTypeContent);
+
+        // Eagerload Relations
+        $this->eagerLoadRelations($dataTypeContent, $dataType, 'edit', $isModelTranslatable);
+
+        $view = 'voyager::bread.edit-add';
+
+        if (view()->exists("voyager::$slug.edit-add")) {
+            $view = "voyager::$slug.edit-add";
+        }
+
+        return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable'));
+    }
+
+//***************************************
+    //                _____
+    //               |  __ \
+    //               | |  | |
+    //               | |  | |
+    //               | |__| |
+    //               |_____/
+    //
+    //         Delete an item BREA(D)
+    //
+    //****************************************
+
+    public function destroy(Request $request, $id)
+    {
+        $slug = $this->getSlug($request);
+
+        $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
+
+        // Init array of IDs
+        $ids = [];
+        if (empty($id)) {
+            // Bulk delete, get IDs from POST
+            $ids = explode(',', $request->ids);
+        } else {
+            // Single item delete, get ID from URL
+            $ids[] = $id;
+        }
+        foreach ($ids as $id) {
+            $data = call_user_func([$dataType->model_name, 'findOrFail'], $id);
+
+            // Check permission
+            $this->authorize('delete', $data);
+
+            $model = app($dataType->model_name);
+            if (!($model && in_array(SoftDeletes::class, class_uses_recursive($model)))) {
+                $this->cleanup($dataType, $data);
+            }
+        }
+        if( isset($data->user_id) && $data->user_id != Auth::id() && !Auth::user()->hasRole('admin') ) {
+            abort(404 , 'NOT FOUND');
+        }
+        $displayName = count($ids) > 1 ? $dataType->getTranslatedAttribute('display_name_plural') : $dataType->getTranslatedAttribute('display_name_singular');
+
+        $res = $data->destroy($ids);
+        $data = $res
+            ? [
+                'message'    => __('voyager::generic.successfully_deleted')." {$displayName}",
+                'alert-type' => 'success',
+            ]
+            : [
+                'message'    => __('voyager::generic.error_deleting')." {$displayName}",
+                'alert-type' => 'error',
+            ];
+
+        if ($res) {
+            event(new BreadDataDeleted($dataType, $data));
+        }
+
+        return redirect()->route("voyager.{$dataType->slug}.index")->with($data);
+    }
+
+
+/**
+     * Remove translations, images and files related to a BREAD item.
+     *
+     * @param \Illuminate\Database\Eloquent\Model $dataType
+     * @param \Illuminate\Database\Eloquent\Model $data
+     *
+     * @return void
+     */
+    protected function cleanup($dataType, $data)
+    {
+        if( isset($data->user_id) && $data->user_id != Auth::id() && !Auth::user()->hasRole('admin') ) {
+            abort(404 , 'NOT FOUND');
+        }
+        // Delete Translations, if present
+        if (is_bread_translatable($data)) {
+            $data->deleteAttributeTranslations($data->getTranslatableAttributes());
+        }
+
+        // Delete Images
+        $this->deleteBreadImages($data, $dataType->deleteRows->whereIn('type', ['image', 'multiple_images']));
+
+        // Delete Files
+        foreach ($dataType->deleteRows->where('type', 'file') as $row) {
+            if (isset($data->{$row->field})) {
+                foreach (json_decode($data->{$row->field}) as $file) {
+                    $this->deleteFileIfExists($file->download_link);
+                }
+            }
+        }
+
+        // Delete media-picker files
+        $dataType->rows->where('type', 'media_picker')->where('details.delete_files', true)->each(function ($row) use ($data) {
+            $content = $data->{$row->field};
+            if (isset($content)) {
+                if (!is_array($content)) {
+                    $content = json_decode($content);
+                }
+                if (is_array($content)) {
+                    foreach ($content as $file) {
+                        $this->deleteFileIfExists($file);
+                    }
+                } else {
+                    $this->deleteFileIfExists($content);
+                }
+            }
+        });
+    }
+
+
+
+
+    /* ---------------------------- */
     public function insertUpdateData($request, $slug, $rows, $data)
     {
+        if( isset($data->user_id) && $data->user_id != Auth::id() && !Auth::user()->hasRole('admin') ) {
+            abort(404 , 'NOT FOUND');
+        }
         
         $multi_select = [];
 

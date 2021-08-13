@@ -36,7 +36,8 @@ class Article extends Model
                 $model->slug = $slug;
             }
             $model->excerpt = Str::limit( strip_tags($model->body), 120 , '...');
-             if(!$model->user_i) {
+            
+            if(! $model->user_id) {
                  $model->user_id = Auth::user()->id;
             } 
         });

@@ -37,7 +37,7 @@ class iseedDummy extends Command
      */
     public function handle()
     {
-        exec('php artisan iseed users,articles,audio,videos,comments,categories,categorizable,tags,taggable --clean --force');
+        exec('php artisan iseed users,articles,audio,videos,comments,categories,categorizables,tags,taggables --clean --force');
         return 0;
     }
 }

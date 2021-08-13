@@ -1192,7 +1192,7 @@ class DataRowsTableSeeder extends Seeder
                 'id' => 108,
                 'data_type_id' => 15,
                 'field' => 'approved',
-                'type' => 'text',
+                'type' => 'checkbox',
                 'display_name' => 'Approved',
                 'required' => 1,
                 'browse' => 1,

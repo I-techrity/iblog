@@ -19,7 +19,7 @@ class CreateCommentsTable extends Migration
             $table->string('body');
             $table->integer('commentable_id');
             $table->string('commentable_type');
-            $table->boolean('approved');
+            $table->boolean('approved')->default(0);
             $table->timestamps();
         });
     }

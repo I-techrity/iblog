@@ -4,6 +4,17 @@
 
 ## todo list
 
+- [x] base laravel with voyager & iseed
+- [x] tags categories , posts types migratiuon models and breads 
+- [x] setting polymorphic relationships (categtories,tags) x (articles,videos,audio)
+- [x] override voyager controller and bread with polymorphic relationship
+- [x] owner or admin auithorisation guards
+- [x] iblog assets and style
+- [ ] seperate register and login form
+- [ ] socialite login facebook
+- [ ] front office controllers and routers
+
+
 
 
 

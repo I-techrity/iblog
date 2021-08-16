@@ -16,9 +16,9 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
-    }
+        return view('articles.index' , ['articles'=> Article::latest()->paginate(10)]);
 
+    }
     /**
      * Show the form for creating a new resource.
      *

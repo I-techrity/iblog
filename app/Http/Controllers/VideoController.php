@@ -14,7 +14,8 @@ class VideoController extends Controller
      */
     public function index()
     {
-        //
+        return view('videos.index' , ['videos'=> Video::latest()->paginate(10)]);
+
     }
 
     /**

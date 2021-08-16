@@ -10,8 +10,8 @@
 - [x] override voyager controller and bread with polymorphic relationship
 - [x] owner or admin auithorisation guards
 - [x] iblog assets and style
-- [ ] seperate register and login form
-- [ ] socialite login facebook
+- [x] seperate register and login form
+- [ ] facebook login
 - [ ] front office controllers and routers
 
 

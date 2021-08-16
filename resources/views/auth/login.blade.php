@@ -76,6 +76,13 @@
                         </div>
                     </div>
                     </form>
+
+                    <div class="row mt-3">
+
+                        <a href="{{ route('auth.facebook.redirect') }}" class="btn  my-1 mx-auto text-center btn-social btn-facebook">
+                            <i class="fa fa-facebook fa-fw"></i> Login with Facebook
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -7,6 +7,8 @@
                 
                 <div class="my-3 p-4 bg-white shadow rounded mt-5">
                     <h2 class="text-center mb-5"> Register to IBlog </h2>
+                   
+                        
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
@@ -67,6 +69,14 @@
                             </div>
                         </div>
                     </form>
+
+
+                    <div class="row mt-3">
+
+                        <a href="{{ route('auth.facebook.redirect') }}" class="btn  my-1 mx-auto text-center btn-social btn-facebook">
+                            <i class="fa fa-facebook fa-fw"></i> Register with Facebook
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

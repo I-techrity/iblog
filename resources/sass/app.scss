@@ -6,3 +6,38 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import '~font-awesome/scss/font-awesome';
+
+
+.btn-facebook {
+    color: #fff;
+    background-color: #3b5898be;
+    border-color: rgba(0,0,0,0.2);
+}
+
+.btn-social {
+    position: relative;
+    padding-left: 44px;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn-social:hover {
+    color: #eee;
+    background-color: #3b5898;
+
+}
+
+.btn-social :first-child {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    padding: 7px;
+    font-size: 1.6em;
+    text-align: center;
+    border-right: 1px solid rgba(0,0,0,0.2);
+}

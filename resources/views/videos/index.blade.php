@@ -8,7 +8,7 @@
                 @forelse ($videos as $video) 
                 <div>
 
-                    <a href="{{ route('videos.show' , $video->slug) }}">{{ $article->title }}</a>
+                    <a href="{{ route('videos.show' , $video->slug) }}">{{ $video->title }}</a>
                 </div>
                     @empty
                     no 'read' records yet

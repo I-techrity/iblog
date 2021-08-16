@@ -43,19 +43,19 @@ Route::get('/articles/{article}', [ArticleController::class , 'show'])->name('ar
 Route::get('/videos/{video}', [VideoController::class , 'show'])->name('videos.show');
 Route::get('/audios/{audio}', [AudioController::class , 'show'])->name('audios.show');
 Route::get('/profile/{user}', [ProfileController::class , 'show'])->name('profile.show');
-Route::get('/watch', [VideoController::class , 'index'])->name('videos.index');
-Route::get('/hear', [AudioController::class , 'index'])->name('audios.index');
-Route::get('/read', [ArticleController::class , 'index'])->name('articles.index');
+Route::get('/watch', [VideoController::class , 'index'])->name('watch');
+Route::get('/hear', [AudioController::class , 'index'])->name('hear');
+Route::get('/read', [ArticleController::class , 'index'])->name('read');
 Route::get('/videos', function () {
-    return redirect()->route('videos.index');
-});
+    return redirect()->route('watch');
+})->name('videos.index');
 Route::get('/audios', function () {
-    return redirect()->route('audios.index');
-});
+    return redirect()->route('hear');
+})->name('audios.index');
 Route::get('/articles', function () {
     return redirect()->route('articles.index');
-});
-Route::get('/', [FeedController::class , 'index'])->name('feed.index');
+})->name('articles.index');
+Route::get('/', [FeedController::class , 'index'])->name('feed');
 
 Auth::routes();
 

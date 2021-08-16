@@ -27,8 +27,8 @@ Feed
              </div>
 
              <div class="my-3
-             tags
-             <br>">
+             ">tags
+             <br>
                 {{ dump($tags) }}
              </div>
 

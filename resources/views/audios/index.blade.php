@@ -8,7 +8,7 @@
                 @forelse ($audios as $audio) 
                 <div>
 
-                    <a href="{{ route('audios.show' , $audio->slug) }}">{{ $article->title }}</a>
+                    <a href="{{ route('audios.show' , $audio->slug) }}">{{ $audio->title }}</a>
                 </div>
                     @empty
                     no 'read' records yet

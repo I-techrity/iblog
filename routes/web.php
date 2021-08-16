@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AudioController;
+use App\Http\Controllers\FeedController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VideoController;
 use App\Models\User;
@@ -23,9 +24,9 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
 Route::group(['prefix' => 'dashboard'], function () {
@@ -42,6 +43,7 @@ Route::get('/articles/{article}', [ArticleController::class , 'show'])->name('ar
 Route::get('/videos/{video}', [VideoController::class , 'show'])->name('videos.show');
 Route::get('/audios/{audio}', [AudioController::class , 'show'])->name('audios.show');
 Route::get('/profile/{user}', [ProfileController::class , 'show'])->name('profile.show');
+Route::get('/', [FeedController::class , 'index'])->name('feed.index');
 
 Auth::routes();
 

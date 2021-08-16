@@ -28,7 +28,7 @@
                         <div class="form-floating mb-4">
                             
                             <label for="password" class="form-label" hidden>{{ __('Password') }}</label>
-                            <input id="password" placeholder="" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
+                            <input id="password" placeholder="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -39,7 +39,7 @@
                         <div class="form-floating mb-4">
                             
                             <label for="password-confirmation" class="form-label" hidden>{{ __('Password') }}</label>
-                            <input id="password-confirmation" placeholder="" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" required>
+                            <input id="password-confirmation" placeholder="password confirmation" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" required>
 
                                 
                         </div>

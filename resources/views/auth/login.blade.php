@@ -6,7 +6,7 @@
         <div class="col-md-6 col-sm-8 col-12">
                 
                 <div class="my-3 p-4 bg-white shadow rounded mt-5">
-                    <h2 class="text-center mb-5"> I Blog </h2>
+                    <h2 class="text-center mb-5"> Login to Iblog </h2>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 

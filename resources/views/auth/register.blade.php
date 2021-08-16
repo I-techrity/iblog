@@ -6,14 +6,14 @@
         <div class="col-md-6 col-sm-8 col-12">
                 
                 <div class="my-3 p-4 bg-white shadow rounded mt-5">
-                    <h2 class="text-center mb-5"> I Blog </h2>
+                    <h2 class="text-center mb-5"> Register to IBlog </h2>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
                         <div class="form-floating mb-4">
                             
                             <label for="name" class="form-label" hidden>{{ __('Name') }}</label>
-                            <input id="name" type="text" placeholder="name address" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                            <input id="name" type="text" placeholder="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -35,7 +35,7 @@
                         <div class="form-floating mb-4">
                             
                             <label for="password" class="form-label" hidden>{{ __('Password') }}</label>
-                            <input id="password" placeholder="" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
+                            <input id="password" placeholder="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -46,7 +46,7 @@
                         <div class="form-floating mb-4">
                             
                             <label for="password-confirmation" class="form-label" hidden>{{ __('Password') }}</label>
-                            <input id="password-confirmation" placeholder="" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" required>
+                            <input id="password-confirmation" placeholder="password confirmation" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" required>
 
                                 
                         </div>

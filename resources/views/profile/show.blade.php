@@ -4,9 +4,18 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h3>
-                {{  $user->name }} profile
-            </h3>
+            <div class="d-flex justify-content-between">
+
+                <h3>
+                    {{  $user->name }} profile
+                </h3>
+                @if ($user->id === Auth::id())
+                    
+                    <div>
+                        <a href="{{ route('voyager.users.edit' , Auth::id()) }}">Profile Settings</a>
+                    </div>
+                @endif
+            </div>
 
             <div class="my-3">
                 <h4>read</h4>

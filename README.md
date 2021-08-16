@@ -11,8 +11,8 @@
 - [x] owner or admin auithorisation guards
 - [x] iblog assets and style
 - [x] seperate register and login form
-- [ ] facebook login
-- [ ] front office controllers and routers
+- [x] facebook login
+- [x] front office controllers and routers
 
 
 
@@ -34,6 +34,19 @@
 
 
 ## Notes 
+
+voyager controller and views are customized in this project to ensure the best user experience possibe regarding mainly relationships between breads since voyager dosnt support polymorphic relationships and indented fields , notes about customized files are mentioned below :
+- controllers : `VoyagerBreadController.php` is customized to handle :
+    - cruds on polymorphic relationships 
+    - owner or admin manual gate ( ensure no one sees unrelated data )
+- views : `formfield.blade.php` to help display and customize form to handle the polymorphic relationships
+
+
+<strong>
+NB : some changes regarding table names , column names .. may break those customizations .
+</strong>
+
+
 
 ### storage
 

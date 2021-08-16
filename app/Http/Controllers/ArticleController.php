@@ -58,6 +58,8 @@ class ArticleController extends Controller
             }
         }
 
+        return view('articles.show' , ['article'=>$article]);
+
     }
 
     /**

@@ -63,6 +63,9 @@
                                     <a class="dropdown-item" href="{{ route('voyager.dashboard') }}">
                                         {{ __('Dashboard') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('profile.show',  Auth::id() ) }}">
+                                        {{ __('Profile') }}
+                                    </a>
                                     @endauth
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

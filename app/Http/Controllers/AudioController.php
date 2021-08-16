@@ -46,7 +46,7 @@ class AudioController extends Controller
      */
     public function show(Audio $audio)
     {
-        //
+        return view('audios.show' , ['audio'=>$audio]);
     }
 
     /**

@@ -10,6 +10,11 @@ class Audio extends Model
 {
     use HasFactory;
     protected $table = 'audio';
+    protected $appends = ['link'];
+
+    public function getLinkAttribute() {
+        return  '/storage/'.json_decode($this->file)[0]->download_link;
+    }
     public function owner()
     {
         return $this->belongsTo(User::class , 'user_id');

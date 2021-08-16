@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\AudioController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\VideoController;
 use App\Models\User;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
@@ -36,6 +39,9 @@ Route::group(['prefix' => 'dashboard'], function () {
 // })->middleware(['auth', 'signed'])->name('verification.verify');
 
 Route::get('/articles/{article}', [ArticleController::class , 'show'])->name('articles.show');
+Route::get('/videos/{video}', [VideoController::class , 'show'])->name('videos.show');
+Route::get('/audios/{audio}', [AudioController::class , 'show'])->name('audios.show');
+Route::get('/profile/{user}', [ProfileController::class , 'show'])->name('profile.show');
 
 Auth::routes();
 

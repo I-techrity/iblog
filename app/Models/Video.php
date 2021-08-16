@@ -9,6 +9,11 @@ use Illuminate\Support\Str;
 class Video extends Model
 {
     use HasFactory;
+
+    protected $appends = ['link'];
+    public function getLinkAttribute() {
+        return '/storage/'.json_decode($this->file)[0]->download_link;
+    }
     public function owner()
     {
         return $this->belongsTo(User::class , 'user_id');

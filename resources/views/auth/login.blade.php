@@ -55,16 +55,26 @@
                             <div class="col">
                               <!-- Simple link -->
                               @if (Route::has('password.request'))
-                              <a href="{{ route('password.request') }}">
-                                  {{ __('Forgot Your Password?') }}
-                              </a>
-                          @endif
+                                <a href="{{ route('password.request') }}">
+                                    {{ __('Forgot Your Password?') }}
+                                </a>
+                                @endif
+                                
                             </div>
                           </div>
-                        
-                        <button type="submit" class="btn btn-primary btn-block">
-                            {{ __('Login') }}
-                        </button>
+                        <div class="d-flex align-items-center justify-content-between">
+
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('Login') }}
+                            </button>
+                            
+                            <div>
+                            you dont have an account ?
+                            <a href="{{ route('register') }}">
+                                register here
+                            </a>
+                        </div>
+                    </div>
                     </form>
                 </div>
             </div>

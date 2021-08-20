@@ -14,7 +14,7 @@ class AudioController extends Controller
      */
     public function index()
     {
-        return view('audios.index' , ['audios'=> Audio::latest()->paginate(10)]);
+        return view('audios.index' , ['audios'=> Audio::where('approved' , true)->latest()->paginate(10)]);
 
     }
     /**
@@ -46,6 +46,9 @@ class AudioController extends Controller
      */
     public function show(Audio $audio)
     {
+        if(!$audio->approved) {
+            abort(404);
+        }
         return view('audios.show' , ['audio'=>$audio]);
     }
 

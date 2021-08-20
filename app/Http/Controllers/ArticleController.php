@@ -16,7 +16,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view('articles.index' , ['articles'=> Article::latest()->paginate(10)]);
+        return view('articles.index' , ['articles'=> Article::where('approved' , true)->latest()->paginate(10)]);
 
     }
     /**
@@ -49,7 +49,9 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         //
-        
+        if(!$article->approved) {
+            abort(404);
+        }
         if( Auth::id() != $article->owner->id  && (Cookie::get('article'.'_'.$article->id) != $article->id)){
             $article->increment('clicks') ;
             Cookie::queue('article'.'_'.$article->id, $article->id, 0.5); // no clikcs for 30seconds

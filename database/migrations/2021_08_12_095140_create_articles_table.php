@@ -19,6 +19,7 @@ class CreateArticlesTable extends Migration
             $table->string('slug')->unique();
             $table->string('cover')->nullable();
             $table->string('image')->nullable();
+            $table->boolean('approved')->default(0);
             $table->unsignedBigInteger('clicks')->default(0);
             $table->foreignId('user_id');
             $table->text('body');

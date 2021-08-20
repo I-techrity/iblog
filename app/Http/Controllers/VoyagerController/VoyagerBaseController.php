@@ -449,6 +449,15 @@ class VoyagerBaseController extends BaseVoyagerBaseController
             abort(403 , 'THIS ACTION IS UNAUTHORIZED');
         }
         
+        
+        if( isset($data->approved) &&  !Auth::user()->hasRole('admin') ) {
+            $approved = $request->approved == "on" ? 1 : 0;
+            if($approved != $data->approved) {
+
+                abort(403 , 'THIS ACTION IS UNAUTHORIZED');
+            }
+        }
+        
         $multi_select = [];
 
         // Pass $rows so that we avoid checking unused fields

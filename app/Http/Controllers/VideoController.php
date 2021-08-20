@@ -14,7 +14,7 @@ class VideoController extends Controller
      */
     public function index()
     {
-        return view('videos.index' , ['videos'=> Video::latest()->paginate(10)]);
+        return view('videos.index' , ['videos'=> Video::where('approved' , true)->latest()->paginate(10)]);
 
     }
 
@@ -47,6 +47,9 @@ class VideoController extends Controller
      */
     public function show(Video $video)
     {
+        if(!$video->approved) {
+            abort(404);
+        }
         return view('videos.show' , ['video'=>$video]);
     }
 

@@ -22,6 +22,7 @@ class CreateVideosTable extends Migration
             $table->string('file')->nullable();
             $table->string('youtube_link')->nullable();
             $table->text('desc')->nullable();
+            $table->boolean('approved')->default(0);
             $table->unsignedBigInteger('clicks')->default(0);
             $table->timestamps();
         });

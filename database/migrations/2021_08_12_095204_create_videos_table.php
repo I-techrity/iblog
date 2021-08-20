@@ -19,7 +19,8 @@ class CreateVideosTable extends Migration
             $table->string('slug')->unique();
             $table->string('cover')->nullable();
             $table->foreignId('user_id');
-            $table->string('file');
+            $table->string('file')->nullable();
+            $table->string('youtube_link')->nullable();
             $table->text('desc')->nullable();
             $table->unsignedBigInteger('clicks')->default(0);
             $table->timestamps();

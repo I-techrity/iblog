@@ -49,9 +49,9 @@ class VoyagerBaseController extends BaseVoyagerBaseController
         if (strlen($dataType->model_name) != 0) {
             $model = app($dataType->model_name);
             $query = $model::select($dataType->name.'.*');
-            if( Schema::hasColumn($dataType->name, 'user_id')  && !Auth::user()->hasRole(['admin' , 'super']) ) {
-                $query = $query->where('user_id' , Auth::id());
-            }
+            // if( Schema::hasColumn($dataType->name, 'user_id')  && !Auth::user()->hasRole(['admin' , 'super']) ) {
+            //     $query = $query->where('user_id' , Auth::id());
+            // }
 
             if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope'.ucfirst($dataType->scope))) {
                 $query->{$dataType->scope}();
@@ -233,9 +233,9 @@ class VoyagerBaseController extends BaseVoyagerBaseController
 
 
         // abort if not admin nor owner 
-        if( isset($dataTypeContent->user_id) && $dataTypeContent->user_id != Auth::id() && !Auth::user()->hasRole(['admin' , 'super']) ) {
-            abort(403 , 'THIS ACTION IS UNAUTHORIZED');
-        }
+        // if( isset($dataTypeContent->user_id) && $dataTypeContent->user_id != Auth::id() && !Auth::user()->hasRole(['admin' , 'super']) ) {
+        //     abort(403 , 'THIS ACTION IS UNAUTHORIZED');
+        // }
 
 
         // Replace relationships' keys for labels and create READ links if a slug is provided.
@@ -300,9 +300,9 @@ class VoyagerBaseController extends BaseVoyagerBaseController
             $dataTypeContent = DB::table($dataType->name)->where('id', $id)->first();
         }
         // abort if not admin nor owner 
-        if( isset($dataTypeContent->user_id) && $dataTypeContent->user_id != Auth::id() && !Auth::user()->hasRole(['admin' , 'super']) ) {
-            abort(403 , 'THIS ACTION IS UNAUTHORIZED');
-        }
+        // if( isset($dataTypeContent->user_id) && $dataTypeContent->user_id != Auth::id() && !Auth::user()->hasRole(['admin' , 'super']) ) {
+        //     abort(403 , 'THIS ACTION IS UNAUTHORIZED');
+        // }
 
         foreach ($dataType->editRows as $key => $row) {
             $dataType->editRows[$key]['col_width'] = isset($row->details->width) ? $row->details->width : 100;
@@ -367,9 +367,9 @@ class VoyagerBaseController extends BaseVoyagerBaseController
                 $this->cleanup($dataType, $data);
             }
         }
-        if( isset($data->user_id) && $data->user_id != Auth::id() && !Auth::user()->hasRole(['admin' , 'super']) ) {
-            abort(403 , 'THIS ACTION IS UNAUTHORIZED');
-        }
+        // if( isset($data->user_id) && $data->user_id != Auth::id() && !Auth::user()->hasRole(['admin' , 'super']) ) {
+        //     abort(403 , 'THIS ACTION IS UNAUTHORIZED');
+        // }
         $displayName = count($ids) > 1 ? $dataType->getTranslatedAttribute('display_name_plural') : $dataType->getTranslatedAttribute('display_name_singular');
 
         $res = $data->destroy($ids);
@@ -401,9 +401,9 @@ class VoyagerBaseController extends BaseVoyagerBaseController
      */
     protected function cleanup($dataType, $data)
     {
-        if( isset($data->user_id) && $data->user_id != Auth::id() && !Auth::user()->hasRole(['admin' , 'super']) ) {
-            abort(403 , 'THIS ACTION IS UNAUTHORIZED');
-        }
+        // if( isset($data->user_id) && $data->user_id != Auth::id() && !Auth::user()->hasRole(['admin' , 'super']) ) {
+        //     abort(403 , 'THIS ACTION IS UNAUTHORIZED');
+        // }
         // Delete Translations, if present
         if (is_bread_translatable($data)) {
             $data->deleteAttributeTranslations($data->getTranslatableAttributes());
@@ -445,11 +445,13 @@ class VoyagerBaseController extends BaseVoyagerBaseController
     /* ---------------------------- */
     public function insertUpdateData($request, $slug, $rows, $data)
     {
-        if( isset($data->user_id) && $data->user_id != Auth::id() && !Auth::user()->hasRole(['admin' , 'super']) ) {
-            abort(403 , 'THIS ACTION IS UNAUTHORIZED');
-        }
+        // if( isset($data->user_id) && $data->user_id != Auth::id() && !Auth::user()->hasRole(['admin' , 'super']) ) {
+        //     abort(403 , 'THIS ACTION IS UNAUTHORIZED');
+        // }
         
         
+
+        // only super or admins can validate posts !
         if( isset($data->approved) &&  !Auth::user()->hasRole(['admin' , 'super']) ) {
             $approved = $request->approved == "on" ? 1 : 0;
             if($approved != $data->approved) {

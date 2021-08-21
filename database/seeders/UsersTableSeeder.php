@@ -44,7 +44,7 @@ class UsersTableSeeder extends Seeder
                 'avatar' => 'users/default.png',
                 'email_verified_at' => NULL,
                 'password' => '$2y$10$PFERMKS6KIKsR.Ln7LCvP.cSDK2q/AE1723ijdxtzyTR23roLd.Wm',
-                'remember_token' => 'LAOswLnwjGHIBaT6ha7ziakKFAQIYAmXszh8mv0JIjJxoQSmkGgbGNKxChfn',
+                'remember_token' => 'WH2DgiqBmuy1aJH6yiwzBGXwgN8ktXr5HmWH4VwQQ9rJH8bwXEJsUM4nVS2M',
                 'settings' => '{"locale":"en"}',
                 'created_at' => '2021-08-12 08:46:00',
                 'updated_at' => '2021-08-21 20:13:15',

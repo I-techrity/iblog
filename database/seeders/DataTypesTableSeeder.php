@@ -87,9 +87,9 @@ class DataTypesTableSeeder extends Seeder
                 'description' => NULL,
                 'generate_permissions' => 1,
                 'server_side' => 0,
-                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":"owner"}',
                 'created_at' => '2021-08-09 13:31:24',
-                'updated_at' => '2021-08-20 10:47:27',
+                'updated_at' => '2021-08-21 20:36:13',
             ),
             4 => 
             array (
@@ -141,9 +141,9 @@ class DataTypesTableSeeder extends Seeder
                 'description' => NULL,
                 'generate_permissions' => 1,
                 'server_side' => 0,
-                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":"owner"}',
                 'created_at' => '2021-08-12 10:13:17',
-                'updated_at' => '2021-08-20 11:19:51',
+                'updated_at' => '2021-08-21 20:36:24',
             ),
             7 => 
             array (
@@ -159,9 +159,9 @@ class DataTypesTableSeeder extends Seeder
                 'description' => NULL,
                 'generate_permissions' => 1,
                 'server_side' => 0,
-                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":"owner"}',
                 'created_at' => '2021-08-12 10:14:11',
-                'updated_at' => '2021-08-20 11:19:35',
+                'updated_at' => '2021-08-21 20:36:02',
             ),
             8 => 
             array (

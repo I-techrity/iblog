@@ -80,10 +80,10 @@
                                         @if ($row->field != 'approved')
                                             {!! app('voyager')->formField($row, $dataType, $dataTypeContent) !!}
                                             
-                                        @elseif (auth()->user()->hasRole('admin'))
+                                        @elseif (auth()->user()->hasRole(['admin','super']))
                                             {!! app('voyager')->formField($row, $dataType, $dataTypeContent) !!}
                                         @endif
-                                        @if (!auth()->user()->hasRole('admin') && $row->field == 'approved' )
+                                        @if (!auth()->user()->hasRole(['admin','super']) && $row->field == 'approved' )
                                                 {{ $dataTypeContent->{$row->field} ? '? :   true' : '? :   false' }}
                                         @endif
                                     @endif

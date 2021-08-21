@@ -61,6 +61,34 @@ class TagsTableSeeder extends Seeder
                 'created_at' => '2021-08-12 16:14:23',
                 'updated_at' => '2021-08-12 16:14:23',
             ),
+            6 => 
+            array (
+                'id' => 7,
+                'name' => 'lara',
+                'created_at' => '2021-08-20 11:26:36',
+                'updated_at' => '2021-08-20 11:26:36',
+            ),
+            7 => 
+            array (
+                'id' => 8,
+                'name' => 'asasa',
+                'created_at' => '2021-08-20 11:26:47',
+                'updated_at' => '2021-08-20 11:26:47',
+            ),
+            8 => 
+            array (
+                'id' => 9,
+                'name' => 'asasasas',
+                'created_at' => '2021-08-20 11:26:49',
+                'updated_at' => '2021-08-20 11:26:49',
+            ),
+            9 => 
+            array (
+                'id' => 10,
+                'name' => 'aaaaaaaaa',
+                'created_at' => '2021-08-20 11:26:51',
+                'updated_at' => '2021-08-20 11:26:51',
+            ),
         ));
         
         

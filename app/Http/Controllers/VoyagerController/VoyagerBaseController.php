@@ -49,7 +49,7 @@ class VoyagerBaseController extends BaseVoyagerBaseController
         if (strlen($dataType->model_name) != 0) {
             $model = app($dataType->model_name);
             $query = $model::select($dataType->name.'.*');
-            if( Schema::hasColumn($dataType->name, 'user_id')  && !Auth::user()->hasRole('admin') ) {
+            if( Schema::hasColumn($dataType->name, 'user_id')  && !Auth::user()->hasRole(['admin' , 'super']) ) {
                 $query = $query->where('user_id' , Auth::id());
             }
 
@@ -233,7 +233,7 @@ class VoyagerBaseController extends BaseVoyagerBaseController
 
 
         // abort if not admin nor owner 
-        if( isset($dataTypeContent->user_id) && $dataTypeContent->user_id != Auth::id() && !Auth::user()->hasRole('admin') ) {
+        if( isset($dataTypeContent->user_id) && $dataTypeContent->user_id != Auth::id() && !Auth::user()->hasRole(['admin' , 'super']) ) {
             abort(403 , 'THIS ACTION IS UNAUTHORIZED');
         }
 
@@ -300,7 +300,7 @@ class VoyagerBaseController extends BaseVoyagerBaseController
             $dataTypeContent = DB::table($dataType->name)->where('id', $id)->first();
         }
         // abort if not admin nor owner 
-        if( isset($dataTypeContent->user_id) && $dataTypeContent->user_id != Auth::id() && !Auth::user()->hasRole('admin') ) {
+        if( isset($dataTypeContent->user_id) && $dataTypeContent->user_id != Auth::id() && !Auth::user()->hasRole(['admin' , 'super']) ) {
             abort(403 , 'THIS ACTION IS UNAUTHORIZED');
         }
 
@@ -367,7 +367,7 @@ class VoyagerBaseController extends BaseVoyagerBaseController
                 $this->cleanup($dataType, $data);
             }
         }
-        if( isset($data->user_id) && $data->user_id != Auth::id() && !Auth::user()->hasRole('admin') ) {
+        if( isset($data->user_id) && $data->user_id != Auth::id() && !Auth::user()->hasRole(['admin' , 'super']) ) {
             abort(403 , 'THIS ACTION IS UNAUTHORIZED');
         }
         $displayName = count($ids) > 1 ? $dataType->getTranslatedAttribute('display_name_plural') : $dataType->getTranslatedAttribute('display_name_singular');
@@ -401,7 +401,7 @@ class VoyagerBaseController extends BaseVoyagerBaseController
      */
     protected function cleanup($dataType, $data)
     {
-        if( isset($data->user_id) && $data->user_id != Auth::id() && !Auth::user()->hasRole('admin') ) {
+        if( isset($data->user_id) && $data->user_id != Auth::id() && !Auth::user()->hasRole(['admin' , 'super']) ) {
             abort(403 , 'THIS ACTION IS UNAUTHORIZED');
         }
         // Delete Translations, if present
@@ -445,12 +445,12 @@ class VoyagerBaseController extends BaseVoyagerBaseController
     /* ---------------------------- */
     public function insertUpdateData($request, $slug, $rows, $data)
     {
-        if( isset($data->user_id) && $data->user_id != Auth::id() && !Auth::user()->hasRole('admin') ) {
+        if( isset($data->user_id) && $data->user_id != Auth::id() && !Auth::user()->hasRole(['admin' , 'super']) ) {
             abort(403 , 'THIS ACTION IS UNAUTHORIZED');
         }
         
         
-        if( isset($data->approved) &&  !Auth::user()->hasRole('admin') ) {
+        if( isset($data->approved) &&  !Auth::user()->hasRole(['admin' , 'super']) ) {
             $approved = $request->approved == "on" ? 1 : 0;
             if($approved != $data->approved) {
 

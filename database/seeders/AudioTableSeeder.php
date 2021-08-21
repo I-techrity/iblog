@@ -28,6 +28,7 @@ class AudioTableSeeder extends Seeder
                 'user_id' => 2,
                 'file' => '[{"download_link":"audio\\\\August2021\\\\PL6tvCwASe6Gjr3ykqtO.mp3","original_name":"y2mate.com - Dave  Clash ft Stormzy.mp3"}]',
                 'desc' => 'stromzy jordan 4\'s',
+                'approved' => 0,
                 'clicks' => 0,
                 'created_at' => '2021-08-12 10:52:43',
                 'updated_at' => '2021-08-12 10:52:43',

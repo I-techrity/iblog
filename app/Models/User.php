@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
+use TCG\Voyager\Models\Role;
 
 class User extends \TCG\Voyager\Models\User /*  implements MustVerifyEmail */
 {
@@ -65,4 +67,9 @@ class User extends \TCG\Voyager\Models\User /*  implements MustVerifyEmail */
     //                 ->union($this->audios());
                     
     // }
+
+    public function scopeSuper($query)
+    {
+        return Auth::user()->hasRole('super') ? $query : $query->where('role_id' , '<>' , Role::where('name' , 'super')->first()->id)->Where('role_id' , '<>' , Role::where('name' , 'admin')->first()->id);
+    }
 }

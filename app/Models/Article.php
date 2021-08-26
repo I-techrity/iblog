@@ -55,4 +55,15 @@ class Article extends Model
     {
         return Auth::user()->hasRole(['admin' , 'super']) ? $query : $query->where('user_id' , Auth::id()) ;
     }
+
+    // full text scope function :
+    public function scopeSearch($query, $q)
+    {
+        return $query->whereRaw(
+            // "MATCH(value) AGAINST(?  WITH QUERY EXPANSION)",
+            // "MATCH(value , answer) AGAINST(?  IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION)", 
+            "MATCH(title , body) AGAINST(? WITH QUERY EXPANSION)",
+            array($q)
+        );
+    }
 }

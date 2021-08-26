@@ -5,7 +5,11 @@ use App\Http\Controllers\AudioController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VideoController;
+use App\Models\Article;
+use App\Models\Audio;
 use App\Models\User;
+use App\Models\Video;
+use Composer\DependencyResolver\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -62,6 +66,27 @@ Auth::routes();
 Route::get('/home',function () {
     return redirect()->route('feed');
 })->name('home');
+
+
+Route::get('/search',function (Request $request) {
+    $query =  Request('query') ;
+    $posts = [];
+    if( $query ) {
+        $articles = Article::where('title' , 'like' , "%{$query}%")->orWhere('body' , 'like' , "%{$query}%")->get();
+        $videos = Video::where('title' , 'like' , "%{$query}%")->orWhere('desc' , 'like' , "%{$query}%")->get();
+        $audios = Audio::where('title' , 'like' , "%{$query}%")->orWhere('desc' , 'like' , "%{$query}%")->get();
+
+        $posts = [ 'articles' =>$articles , 'videos' => $videos , 'audios' => $audios] ;
+
+        
+    }
+
+    if(request()->wantsJson()) {
+
+        return response()->json($posts);
+    }
+    dump($posts);
+})->name('search');
 
 
 

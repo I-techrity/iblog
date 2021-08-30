@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Video;
 use Composer\DependencyResolver\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
@@ -115,4 +116,10 @@ Route::get('/auth/facebook/callback', function () {
 
     
 })->name('auth.facebook.callback');
+
+
+
+Route::get('test', function () {
+    return response()->json(['query' => request('query')] ,200);
+});
     

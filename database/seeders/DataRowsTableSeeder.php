@@ -448,7 +448,7 @@ class DataRowsTableSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => '{}',
+                'details' => 'null',
                 'order' => 6,
             ),
             27 => 
@@ -672,7 +672,7 @@ class DataRowsTableSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => '{}',
+                'details' => 'null',
                 'order' => 4,
             ),
             41 => 

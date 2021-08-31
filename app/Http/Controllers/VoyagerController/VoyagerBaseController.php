@@ -60,22 +60,25 @@ class VoyagerBaseController extends BaseVoyagerBaseController
 
             /// unslash integration foir cover and image
 
-            if($row->field === 'cover'){
-                if(isset($request->cover) && is_string($request->cover)) {
+            if($row->type == 'image'){
+                if(isset($request->{$row->field}) && is_string($request->{$row->field})) {
                     Storage::disk(config('voyager.storage.disk'))->delete($data->{$row->field});
-                    $data->{$row->field} = $request->cover ;
+                    $data->{$row->field} = $request->{$row->field} ;
                     continue;
                 }
             }
-            if($row->field === 'image'){
-                if(isset($request->image) && is_string($request->image)) {
-                    Storage::disk(config('voyager.storage.disk'))->delete($data->{$row->field});
-                    $data->{$row->field} = $request->image;
-                    continue;
-                }
-            }
+            // if($row->field === 'image'){
+            //     if(isset($request->image) && is_string($request->image)) {
+            //         Storage::disk(config('voyager.storage.disk'))->delete($data->{$row->field});
+            //         $data->{$row->field} = $request->image;
+            //         continue;
+            //     }
+            // }
 
             /// end unsplash integration 
+
+
+
 
 
             // Value is saved from $row->details->column row

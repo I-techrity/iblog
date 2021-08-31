@@ -56,18 +56,30 @@ class VoyagerBaseController extends BaseVoyagerBaseController
                     continue;
                 }
             }
+
+
+            /// unslash integration foir cover and image
+
             if($row->field === 'cover'){
+                ddd($data->{$row->field});
                 if(isset($request->cover) && is_string($request->cover)) {
+                    Storage::disk($this->filesystem)->delete($data->{$row->field});
                     $data->{$row->field} = $request->cover ;
                     continue;
                 }
             }
             if($row->field === 'image'){
                 if(isset($request->image) && is_string($request->image)) {
-                    $data->{$row->field} = $request->image ;
+                    ddd($data->{$row->field});
+                    Storage::disk($this->filesystem)->delete($data->{$row->field});
+                    $data->{$row->field} = $request->image;
                     continue;
                 }
             }
+
+            /// end unsplash integration 
+
+
             // Value is saved from $row->details->column row
             if ($row->type == 'relationship' && $row->details->type == 'belongsTo') {
                 continue;

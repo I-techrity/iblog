@@ -21,14 +21,14 @@
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="unsplashSearchLabel_for_{{ $row->field }}">Unsplash Search</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">&#10006;</span>
                     </button>
+                    <h3 class="modal-title" id="unsplashSearchLabel_for_{{ $row->field }}">Unsplash Search</h3>
                 </div>
                 <div class="modal-body form">
                     <div class="form-group">
-                        <input class="form-control" type="text" name="unsplashQuery" id="unsplashSearch_for_{{ $row->field }}">
+                        <input class="form-control" style="margin-bottom: 20px" type="text" name="unsplashQuery" id="unsplashSearch_for_{{ $row->field }}">
                         <div style="min-height: 50px">
                             
                             <span class="hidden" id="unsplash_results_pagination_for_{{ $row->field }}">
@@ -60,35 +60,35 @@
         // global variable for results
         window.results = null
         window.currentPage = 1;
-        var numberPerPage = 12;
         window.numberOfPages = null;
         
         
+
+        // function to check current page value to disable pagination buttons
         function check(field) {
-            
-                if(currentPage == numberOfPages) {
-                    $("#unsplash_results_next_for_"+field).disabled = true;
-                    $("#unsplash_results_next_for_"+field).addClass('disabled btn-dark');
-                    $("#unsplash_results_next_for_"+field).removeClass('btn-primary');
-                }else if(currentPage == 1) {
-                    $("#unsplash_results_previous_for_"+field).disabled = true;
-                    $("#unsplash_results_previous_for_"+field).addClass('disabled btn-dark');
-                    $("#unsplash_results_previous_for_"+field).removeClass('btn-primary');
-                } else {
-                    $("#unsplash_results_next_for_"+field).disabled = false;
-                    $("#unsplash_results_next_for_"+field).addClass('btn-primary');
-                    $("#unsplash_results_next_for_"+field).removeClass('btn-dark disabled');
-                    $("#unsplash_results_previous_for_"+field).disabled = false;
-                    $("#unsplash_results_previous_for_"+field).addClass('btn-primary');
-                    $("#unsplash_results_previous_for_"+field).removeClass('btn-dark disabled');
-                }
-                
-            
+            let next = $("#unsplash_results_next_for_"+field);
+            let previous = $("#unsplash_results_previous_for_"+field);
+
+            if(currentPage == numberOfPages) {
+                next.disabled = true;
+                next.addClass('disabled btn-dark');
+                next.removeClass('btn-primary');
+            }else if(currentPage == 1) {
+                previous.disabled = true;
+                previous.addClass('disabled btn-dark');
+                previous.removeClass('btn-primary');
+            } else {
+                next.disabled = false;
+                next.addClass('btn-primary');
+                next.removeClass('btn-dark disabled');
+                previous.disabled = false;
+                previous.addClass('btn-primary');
+                previous.removeClass('btn-dark disabled');
+            }
         }
 
         //function to get unsplash search results and handle input type change and values
         function getUnsplashResults(query , page , field) {
-
             //clean results div on each new search attemp
             $('#unsplash_results_for_'+field).html('');
 
@@ -117,12 +117,17 @@
                         
                         if(window.numberOfPages) {
                             $('#unsplash_results_pagination_for_'+field).removeClass('hidden')
+                        }else{
+                            $('#unsplash_results_pagination_for_'+field).addClass('hidden')
+                        }
+                        if(!  (window.results.results.length > 0)) {
+                            $('#unsplash_results_for_'+field).html(' <div style="text-align:center;"> no results </div> ');
                         }
                         Array.from(window.results.results).forEach(element => {
                             // loop throught results objects and append its div to results div
-                            $('#unsplash_results_for_'+field).append('<div  style="margin:1rem ;height:250px;width: 250px;display:flex;align-items:center;justify-content:center; overflow:hidden"><img src="'+
+                            $('#unsplash_results_for_'+field).append('<div class="overlay shadow "  style="cursor:pointer; margin:1rem ;height:250px;width: 250px;display:flex;align-items:center;justify-content:center; overflow:hidden"><img src="'+
                                  (element.urls.regular ?? element.urls.raw) 
-                                 +'"alt="" style="width:100% ; flex-shrink : 0;" id="image_'+element.id+'"/></div>'); 
+                                 +'"alt="" class="img-fluid" style="width:100% ; flex-shrink : 0;" id="image_'+element.id+'"/></div>'); 
 
                             // on image click handle values changes and input type
                             $('#image_'+element.id).on('click',function (){
@@ -163,6 +168,10 @@
                         
                     }
                 },
+                error:function() {
+                    $("#loader_for_unsplash_results_for_"+field).css('display' , 'none');
+                    $('#unsplash_results_for_'+field).html(' <div style="text-align:center;"> no results </div> ');
+                }
             });
         }
 
@@ -201,3 +210,19 @@
         });
     </script>
 @endpush
+
+
+<style>
+    .overlay{
+        opacity: 0.9;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+        transition: all 0.3s;
+    }
+    .overlay:hover {
+        opacity: 1;
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: all 0.3s;
+    }
+</style>

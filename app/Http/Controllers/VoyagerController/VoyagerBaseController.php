@@ -61,7 +61,6 @@ class VoyagerBaseController extends BaseVoyagerBaseController
             /// unslash integration foir cover and image
 
             if($row->field === 'cover'){
-                ddd($data->{$row->field});
                 if(isset($request->cover) && is_string($request->cover)) {
                     Storage::disk($this->filesystem)->delete($data->{$row->field});
                     $data->{$row->field} = $request->cover ;
@@ -70,7 +69,6 @@ class VoyagerBaseController extends BaseVoyagerBaseController
             }
             if($row->field === 'image'){
                 if(isset($request->image) && is_string($request->image)) {
-                    ddd($data->{$row->field});
                     Storage::disk($this->filesystem)->delete($data->{$row->field});
                     $data->{$row->field} = $request->image;
                     continue;

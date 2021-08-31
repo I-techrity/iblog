@@ -62,14 +62,14 @@ class VoyagerBaseController extends BaseVoyagerBaseController
 
             if($row->field === 'cover'){
                 if(isset($request->cover) && is_string($request->cover)) {
-                    Storage::disk($this->filesystem)->delete($data->{$row->field});
+                    Storage::disk(config('voyager.storage.disk'))->delete($data->{$row->field});
                     $data->{$row->field} = $request->cover ;
                     continue;
                 }
             }
             if($row->field === 'image'){
                 if(isset($request->image) && is_string($request->image)) {
-                    Storage::disk($this->filesystem)->delete($data->{$row->field});
+                    Storage::disk(config('voyager.storage.disk'))->delete($data->{$row->field});
                     $data->{$row->field} = $request->image;
                     continue;
                 }

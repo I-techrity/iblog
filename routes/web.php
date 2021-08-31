@@ -120,6 +120,13 @@ Route::get('/auth/facebook/callback', function () {
 
 
 Route::get('test', function () {
-    return response()->json(['query' => request('query')] ,200);
+    $search = Unsplash::search()
+    ->term(request('query'))
+    ->page(request('page'))
+    ->perPage(12)
+    // ->color('black_and_white')
+    // ->orientation('squarish')
+    ->toJson();
+    return response()->json(['results' => $search] ,200);
 });
     

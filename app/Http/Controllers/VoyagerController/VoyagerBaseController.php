@@ -25,8 +25,7 @@ class VoyagerBaseController extends BaseVoyagerBaseController
         //     abort(403 , 'THIS ACTION IS UNAUTHORIZED');
         // }
         
-        
-
+           
         // --CUSTOM-- only super or admins can validate posts !
         if( isset($data->approved) &&  !Auth::user()->hasRole(['admin' , 'super']) ) {
             $approved = $request->approved == "on" ? 1 : 0;
@@ -57,14 +56,24 @@ class VoyagerBaseController extends BaseVoyagerBaseController
                     continue;
                 }
             }
-
+            if($row->field === 'cover'){
+                if(isset($request->cover) && is_string($request->cover)) {
+                    $data->{$row->field} = $request->cover ;
+                    continue;
+                }
+            }
+            if($row->field === 'image'){
+                if(isset($request->image) && is_string($request->image)) {
+                    $data->{$row->field} = $request->image ;
+                    continue;
+                }
+            }
             // Value is saved from $row->details->column row
             if ($row->type == 'relationship' && $row->details->type == 'belongsTo') {
                 continue;
             }
 
             $content = $this->getContentBasedOnType($request, $slug, $row, $row->details);
-
             if ($row->type == 'relationship' && $row->details->type != 'belongsToMany') {
                 $row->field = @$row->details->column;
             }

@@ -19,7 +19,7 @@ class CreateVideosTable extends Migration
             $table->string('slug')->unique();
             $table->string('cover')->nullable();
             $table->foreignId('user_id');
-            $table->string('file')->nullable();
+            $table->text('file')->nullable();
             $table->string('youtube_link')->nullable();
             $table->text('desc')->nullable();
             $table->boolean('approved')->default(0);

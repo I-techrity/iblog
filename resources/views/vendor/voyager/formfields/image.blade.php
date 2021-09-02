@@ -9,7 +9,7 @@
 
 <input id="image_input_for_{{ $row->field }}" style="margin-bottom : 10px;" @if($row->required == 1 && !isset($dataTypeContent->{$row->field})) required @endif type="file" name="{{ $row->field }}" accept="image/*">
 <a type="button" role="button" class="mx-4" data-toggle="modal" id="unsplash_search_modal_open_for_{{ $row->field }}" data-target="#unsplash_search_modal_for_{{ $row->field }}">
-    find an image on unsplash ?
+    find an image online ? (copyright free)
 </a>
 
 <a type="button" role="button" class="mx-4" hidden id="image_upload_open_for_{{ $row->field }}">

@@ -241,13 +241,14 @@ return [
         'allow_delete'        => true,
         'allow_create_folder' => true,
         'allow_rename'        => true,
-        /*'watermark'           => [
-            'source'         => 'watermark.png',
+        'watermark'           => [
+            'source'         => 'iblog.png',
             'position'       => 'bottom-left',
-            'x'              => 0,
-            'y'              => 0,
+            'x'              => 20,
+            'y'              => 20,
             'size'           => 15,
        ],
+       /*
        'thumbnails'          => [
            [
                 'type'  => 'fit',

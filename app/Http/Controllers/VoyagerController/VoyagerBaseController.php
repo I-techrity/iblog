@@ -5,14 +5,17 @@ namespace App\Http\Controllers\VoyagerController;
 use Illuminate\Support\Facades\Gate;
 use TCG\Voyager\Http\Controllers\VoyagerBaseController as BaseVoyagerBaseController;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
 use TCG\Voyager\Events\BreadDataAdded;
 use TCG\Voyager\Facades\Voyager;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use TCG\Voyager\Events\BreadDataDeleted;
+use Intervention\Image\Facades\Image;
 
 class VoyagerBaseController extends BaseVoyagerBaseController
 {
@@ -25,6 +28,7 @@ class VoyagerBaseController extends BaseVoyagerBaseController
         //     abort(403 , 'THIS ACTION IS UNAUTHORIZED');
         // }
         
+        // ddd($request->file('cover'));
            
         // --CUSTOM-- only super or admins can validate posts !
         if( isset($data->approved) &&  !Auth::user()->hasRole(['admin' , 'super']) ) {
@@ -59,9 +63,8 @@ class VoyagerBaseController extends BaseVoyagerBaseController
 
 
             /// unslash integration foir cover and image
-
-            if($row->type == 'image'){
-                if(isset($request->{$row->field}) && is_string($request->{$row->field})) {
+            if($row->type == 'image' && isset($request->{$row->field})){
+                if(is_string($request->{$row->field})) {
                     Storage::disk(config('voyager.storage.disk'))->delete($data->{$row->field});
                     $data->{$row->field} = $request->{$row->field} ;
                     continue;
@@ -107,7 +110,11 @@ class VoyagerBaseController extends BaseVoyagerBaseController
 
                 // If the image upload is null and it has a current image keep the current image
                 if ($row->type == 'image' && is_null($request->input($row->field)) && isset($data->{$row->field})) {
+
                     $content = $data->{$row->field};
+                    // if($imagetemp) {
+                    //     ddd($imagetemp);
+                    // }
                 }
 
                 // If the multiple_images upload is null and it has a current image keep the current image
@@ -142,6 +149,14 @@ class VoyagerBaseController extends BaseVoyagerBaseController
                 ];
             } else {
                 $data->{$row->field} = $content;
+                if($row->type == 'image' && Storage::disk(config('voyager.storage.disk'))->exists($data->{$row->field})) {
+                   
+                    $file = Storage::disk(config('voyager.storage.disk'))->get($data->{$row->field});
+                    $image = Image::make($file);
+                    $extension = $image->extension;
+                    $image = $this->addWatermarkToImage($image , (object) config('voyager.media.watermark'));
+                    Storage::disk(config('voyager.storage.disk'))->put($data->{$row->field} , $image->encode()->encoded);
+                }
             }
         }
 
@@ -154,6 +169,8 @@ class VoyagerBaseController extends BaseVoyagerBaseController
         }
 
         $data->save();
+        
+        
 
         // Save translations
         if (count($translations) > 0) {
@@ -210,7 +227,21 @@ class VoyagerBaseController extends BaseVoyagerBaseController
         return $data;
     }
 
-
+    private function addWatermarkToImage($image, $options)
+    {
+        $watermark = Image::make(Storage::disk(config('voyager.storage.disk'))->get($options->source));
+        // Resize watermark
+        $width = $image->width() * (($options->size ?? 15) / 100);
+        $watermark->resize($width, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+        return $image->insert(
+            $watermark,
+            ($options->position ?? 'bottom-right'),
+            ($options->x ?? 0),
+            ($options->y ?? 0)
+        );
+    }
 
     // public function index(Request $request)
     // {

@@ -2,20 +2,10 @@
 
 namespace App\Http\Controllers\VoyagerController;
 
-use Illuminate\Support\Facades\Gate;
 use TCG\Voyager\Http\Controllers\VoyagerBaseController as BaseVoyagerBaseController;
-use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Schema;
-use TCG\Voyager\Events\BreadDataAdded;
-use TCG\Voyager\Facades\Voyager;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use TCG\Voyager\Events\BreadDataDeleted;
-use Intervention\Image\Facades\Image;
 
 class VoyagerBaseController extends BaseVoyagerBaseController
 {
@@ -150,8 +140,27 @@ class VoyagerBaseController extends BaseVoyagerBaseController
             } else {
                 $data->{$row->field} = $content;
                 if($row->type == 'file' && $slug == "videos") {
-                    $file = Storage::disk(config('voyager.storage.disk'))->get(json_decode( $data->{$row->field} )[0]->download_link);
-                    ddd($file);
+
+                    $file = json_decode( $data->{$row->field} ) ;
+                    $link = $file[0]->download_link;
+                    
+                    $exploded = preg_split('/\\\\/', $link, -1, PREG_SPLIT_NO_EMPTY);
+                    $lastItem = count($exploded) - 1 ;
+                    $exploded[$lastItem] = 'ib' . $exploded[$lastItem] ;
+                    $newLink = implode( '\\' , $exploded);
+
+                    
+                    
+                    
+                    \ProtoneMedia\LaravelFFMpeg\Support\FFMpeg::fromDisk(config('voyager.storage.disk'))
+                    ->open([$link,$link])
+                    ->export()
+                    ->concatWithoutTranscoding()
+                    ->save( $newLink);
+                    
+                    Storage::disk(config('voyager.storage.disk'))->delete($link);
+                    $file[0]->download_link = $newLink;
+                    $data->{$row->field} =  json_encode($file);
                 }
             }
         }

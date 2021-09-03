@@ -87,9 +87,9 @@ class DataTypesTableSeeder extends Seeder
                 'description' => NULL,
                 'generate_permissions' => 1,
                 'server_side' => 0,
-                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":"owner"}',
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":"ownerOrAdmin"}',
                 'created_at' => '2021-08-09 13:31:24',
-                'updated_at' => '2021-08-31 10:17:53',
+                'updated_at' => '2021-09-03 11:36:54',
             ),
             4 => 
             array (
@@ -141,9 +141,9 @@ class DataTypesTableSeeder extends Seeder
                 'description' => NULL,
                 'generate_permissions' => 1,
                 'server_side' => 0,
-                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":"owner"}',
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":"ownerOrAdmin"}',
                 'created_at' => '2021-08-12 10:13:17',
-                'updated_at' => '2021-09-03 11:02:47',
+                'updated_at' => '2021-09-03 11:35:04',
             ),
             7 => 
             array (
@@ -159,9 +159,9 @@ class DataTypesTableSeeder extends Seeder
                 'description' => NULL,
                 'generate_permissions' => 1,
                 'server_side' => 0,
-                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":"owner"}',
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":"ownerOrAdmin"}',
                 'created_at' => '2021-08-12 10:14:11',
-                'updated_at' => '2021-09-03 10:59:39',
+                'updated_at' => '2021-09-03 11:37:36',
             ),
             8 => 
             array (

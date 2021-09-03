@@ -151,7 +151,7 @@ class VoyagerBaseController extends BaseVoyagerBaseController
                 ];
             } else {
                 $data->{$row->field} = $content;
-                if($row->type == 'file' && $slug == "videos") {
+                if($row->type == 'file' && $slug == "videos" && $request->file('file')) {
                     $file = json_decode( $data->{$row->field} ) ;
                     
                     if(is_string($request->{$row->field})) {

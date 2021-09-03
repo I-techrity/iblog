@@ -67,7 +67,7 @@ class Article extends Model
     {
         return 'slug';
     }
-    public function scopeOwner($query)
+    public function scopeOwnerOrAdmin($query)
     {
         return Auth::user()->hasRole(['admin' , 'super']) ? $query : $query->where('user_id' , Auth::id()) ;
     }

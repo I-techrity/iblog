@@ -15,6 +15,10 @@ class Audio extends Model
     public static $rules = [
         'file.*' => 'required|file|mimes:mp3,aac,wav,flac'
     ];
+    public function scopeOwnerOrAdmin($query)
+    {
+        return Auth::user()->hasRole(['admin' , 'super']) ? $query : $query->where('user_id' , Auth::id()) ;
+    }
     public function getLinkAttribute() {
         return  '/storage/'.json_decode($this->file)[0]->download_link;
     }
@@ -71,8 +75,5 @@ class Audio extends Model
         return 'slug';
     }
 
-    public function scopeOwner($query)
-    {
-        return Auth::user()->hasRole(['admin' , 'super']) ? $query : $query->where('user_id' , Auth::id()) ;
-    }
+    
 }

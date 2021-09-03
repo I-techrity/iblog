@@ -2,7 +2,7 @@
     @if ($dataType->slug == 'videos')
       <div data-field-name="{{ $row->field }}">
         <video controls style="max-width:100%;">
-          <source src="{{ isset($dataTypeContent->{$row->field}[0]->download_link) ? Storage::disk(config('voyager.storage.disk'))->url( json_decode($dataTypeContent->{$row->field})[0]->download_link ) : $dataTypeContent->{$row->field} }}" >
+          <source src="{{ isset( $dataTypeContent->{$row->field}[0] ) ? Storage::disk(config('voyager.storage.disk'))->url( json_decode($dataTypeContent->{$row->field})[0]->download_link ) : $dataTypeContent->{$row->field} }}" >
           Your browser does not support the audio element.
         </video>  
         

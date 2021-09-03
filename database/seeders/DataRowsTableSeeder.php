@@ -768,7 +768,7 @@ class DataRowsTableSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => '{}',
+                'details' => '{"validation":{"rule":["required","file","mimes:mp3,wav,flac"],"messages":{"file":"audio file is required","mimes":"audio file is required"}}}',
                 'order' => 6,
             ),
             47 => 
@@ -912,7 +912,7 @@ class DataRowsTableSeeder extends Seeder
                 'edit' => 1,
                 'add' => 1,
                 'delete' => 1,
-                'details' => '{}',
+                'details' => '{"validation":{"rule":["nullable","file","mimes:mp4,avi,wav,3gp,mov,wmv"],"messages":{"file":"video file is required","mimes":"video file is required"}}}',
                 'order' => 6,
             ),
             56 => 

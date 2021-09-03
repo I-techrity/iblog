@@ -34,7 +34,7 @@ class VideoDimmer extends BaseDimmer
                 'text' => __("view all videos"),
                 'link' => route('voyager.videos.index')
             ],
-            'image' => voyager_asset('images/widget-backgrounds/03.jpg'),
+            'image' => '/img/background-video.jpg',
         ]));
     }
 

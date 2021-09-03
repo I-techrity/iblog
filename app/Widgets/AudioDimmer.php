@@ -34,7 +34,7 @@ class AudioDimmer extends BaseDimmer
                 'text' => __("view all audios"),
                 'link' => route('voyager.audio.index'),
             ],
-            'image' => voyager_asset('images/widget-backgrounds/03.jpg'),
+            'image' => '/img/background-music.png',
         ]));
     }
 

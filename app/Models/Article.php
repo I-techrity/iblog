@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 class Article extends Model
 {
@@ -44,6 +45,21 @@ class Article extends Model
             if(! $model->user_id) {
                  $model->user_id = Auth::user()->id;
             } 
+        });
+        static::updating(function($model)
+        {   
+            if($model->isDirty('cover')) {
+                $oldCoverExists = Storage::disk('public')->exists($model->getOriginal('cover'));
+                if($model->cover != $model->getOriginal('cover') && $oldCoverExists) {
+                    Storage::disk('public')->delete($model->getOriginal('cover'));
+                }
+            }
+            if($model->isDirty('image')) {
+                $oldImageExists = Storage::disk('public')->exists($model->getOriginal('image'));
+                if($model->image != $model->getOriginal('image') && $oldImageExists) {
+                    Storage::disk('public')->delete($model->getOriginal('image'));
+                }
+            }
         });
     }
 

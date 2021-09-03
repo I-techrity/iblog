@@ -2,17 +2,10 @@
 
 namespace App\Http\Controllers\VoyagerController;
 
-use Illuminate\Support\Facades\Gate;
 use TCG\Voyager\Http\Controllers\VoyagerBaseController as BaseVoyagerBaseController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
-use TCG\Voyager\Events\BreadDataAdded;
-use TCG\Voyager\Facades\Voyager;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use TCG\Voyager\Events\BreadDataDeleted;
 
 class VoyagerBaseController extends BaseVoyagerBaseController
 {
@@ -25,6 +18,7 @@ class VoyagerBaseController extends BaseVoyagerBaseController
         //     abort(403 , 'THIS ACTION IS UNAUTHORIZED');
         // }
         
+        // ddd($request->file('cover'));
            
         // --CUSTOM-- only super or admins can validate posts !
         if( isset($data->approved) &&  !Auth::user()->hasRole(['admin' , 'super']) ) {
@@ -59,14 +53,16 @@ class VoyagerBaseController extends BaseVoyagerBaseController
 
 
             /// unslash integration foir cover and image
-
-            if($row->type == 'image'){
-                if(isset($request->{$row->field}) && is_string($request->{$row->field})) {
+            if($row->type == 'image' && isset($request->{$row->field})){
+                if(is_string($request->{$row->field})) {
                     Storage::disk(config('voyager.storage.disk'))->delete($data->{$row->field});
                     $data->{$row->field} = $request->{$row->field} ;
                     continue;
                 }
             }
+
+
+
             // if($row->field === 'image'){
             //     if(isset($request->image) && is_string($request->image)) {
             //         Storage::disk(config('voyager.storage.disk'))->delete($data->{$row->field});
@@ -94,20 +90,33 @@ class VoyagerBaseController extends BaseVoyagerBaseController
             /*
              * merge ex_images/files and upload images/files
              */
-            if (in_array($row->type, ['multiple_images', 'file']) && !is_null($content)) {
-                if (isset($data->{$row->field})) {
-                    $ex_files = json_decode($data->{$row->field}, true);
-                    if (!is_null($ex_files)) {
-                        $content = json_encode(array_merge($ex_files, json_decode($content)));
-                    }
-                }
+            // if (in_array($row->type, ['multiple_images', 'file']) && !is_null($content)) {
+            //     if (isset($data->{$row->field})) {
+            //         $ex_files = json_decode($data->{$row->field}, true);
+            //         if (!is_null($ex_files)) {
+            //             $content = json_encode(array_merge($ex_files, json_decode($content)));
+            //         }
+            //     }
+            // }
+            if (in_array($row->type, ['multiple_images' , 'file']) && !is_null($content) && !in_array($slug, ['audio' , 'videos'])) {
+                
+                 if (isset($data->{$row->field})) {
+                     $ex_files = json_decode($data->{$row->field}, true);
+                     if (!is_null($ex_files)) {
+                         $content = json_encode(array_merge($ex_files, json_decode($content)));
+                     }
+                 }
             }
-
+    
             if (is_null($content)) {
 
                 // If the image upload is null and it has a current image keep the current image
                 if ($row->type == 'image' && is_null($request->input($row->field)) && isset($data->{$row->field})) {
+
                     $content = $data->{$row->field};
+                    // if($imagetemp) {
+                    //     ddd($imagetemp);
+                    // }
                 }
 
                 // If the multiple_images upload is null and it has a current image keep the current image
@@ -142,6 +151,39 @@ class VoyagerBaseController extends BaseVoyagerBaseController
                 ];
             } else {
                 $data->{$row->field} = $content;
+                if($row->type == 'file' && $slug == "videos") {
+                    $file = json_decode( $data->{$row->field} ) ;
+                    
+                    if(is_string($request->{$row->field})) {
+                        if(isset($file[0]) && isset($file[0]->download_link)) {
+                            Storage::disk(config('voyager.storage.disk'))->delete(json_decode( $file[0]->download_link));
+                        }
+                        $file = [ 'download_link'  => $request->{$row->field}] ;
+                        $data->{$row->field} =  json_encode($file);
+                        continue;
+                        
+                    }else {
+                        
+                        $link = $file[0]->download_link;
+                        $exploded = preg_split('/\\\\/', $link, -1, PREG_SPLIT_NO_EMPTY);
+                        $lastItem = count($exploded) - 1 ;
+                        $exploded[$lastItem] = 'ib' . $exploded[$lastItem] ;
+                        $newLink = implode( '\\' , $exploded);
+                        
+                        
+                        
+                        
+                        \ProtoneMedia\LaravelFFMpeg\Support\FFMpeg::fromDisk(config('voyager.storage.disk'))
+                        ->open([$link,$link])
+                        ->export()
+                        ->concatWithoutTranscoding()
+                        ->save( $newLink );
+                        
+                        Storage::disk(config('voyager.storage.disk'))->delete($link);
+                        $file[0]->download_link = $newLink;
+                        $data->{$row->field} =  json_encode($file);
+                    }
+                }
             }
         }
 
@@ -154,6 +196,8 @@ class VoyagerBaseController extends BaseVoyagerBaseController
         }
 
         $data->save();
+        
+        
 
         // Save translations
         if (count($translations) > 0) {
@@ -210,7 +254,7 @@ class VoyagerBaseController extends BaseVoyagerBaseController
         return $data;
     }
 
-
+   
 
     // public function index(Request $request)
     // {

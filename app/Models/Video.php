@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 class Video extends Model
 {
@@ -43,6 +44,24 @@ class Video extends Model
              if(!$model->user_id) {
                  $model->user_id = Auth::user()->id;
             } 
+        });
+        static::updating(function($model)
+        {   
+            if($model->isDirty('cover')) {
+                $oldCoverExists = Storage::disk('public')->exists($model->getOriginal('cover'));
+                if($model->cover != $model->getOriginal('cover') && $oldCoverExists) {
+                    Storage::disk('public')->delete($model->getOriginal('cover'));
+                }
+            }
+            
+            if($model->isDirty('file')) {
+                $oldFile = json_decode( $model->getOriginal('file') );
+                $oldFileExists = Storage::disk('public')->exists($oldFile[0]->download_link);
+                if(($model->file != $model->getOriginal('file')) && $oldFileExists) {
+                    Storage::disk('public')->delete($oldFile[0]->download_link);
+                }
+            }
+            
         });
     }
 

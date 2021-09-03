@@ -84,7 +84,7 @@
                                             {!! app('voyager')->formField($row, $dataType, $dataTypeContent) !!}
                                         @endif
                                         @if (!auth()->user()->hasRole(['admin','super']) && $row->field == 'approved' )
-                                                {{ $dataTypeContent->{$row->field} ? '? :   true' : '? :   false' }}
+                                                {{ $dataTypeContent->{$row->field} ? '? :   yes' : '? :   no' }}
                                         @endif
                                     @endif
 

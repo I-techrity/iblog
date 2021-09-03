@@ -35,20 +35,20 @@
 @if($dataType->slug == 'videos')
   <input style="margin:20px 0;"  id="input_for_{{ $row->field }}"  @if($row->required == 1 && !isset($dataTypeContent->{$row->field})) required @endif type="file" name="{{ $row->field }}" >
 
-  <a type="button" role="button" class="mx-4"  id="add_a_link_switch_button_for_{{ $row->field }}">
+  {{-- <a type="button" role="button" class="mx-4"  id="add_a_link_switch_button_for_{{ $row->field }}">
     add a link instead ?
   </a>
 
   <a type="button" role="button" class="mx-4" hidden id="upload_switch_button_for_{{ $row->field }}">
     upload a local video
-  </a>
+  </a> --}}
     
 @else
   <input style="margin:20px 0;"   @if($row->required == 1 && !isset($dataTypeContent->{$row->field})) required @endif type="file" name="{{ $row->field }}[]" multiple >
 
 @endif
 
-
+{{-- 
 
 @push('javascript')
     <script>
@@ -80,4 +80,4 @@
         });
     </script>
 @endpush
-
+ --}}

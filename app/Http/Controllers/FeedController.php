@@ -16,9 +16,9 @@ class FeedController extends Controller
     {
         
 
-        $articles = Article::latest()->with(['tags', 'categories' , 'owner'])->paginate(10);
-        $audios = Audio::latest()->with(['tags', 'categories' , 'owner'])->paginate(10);
-        $videos = Video::latest()->with(['tags', 'categories' , 'owner'])->paginate(10);
+        $articles = Article::latest()->with(['tags', 'categories' , 'owner'])->paginate(10 , ['*'] , 'article_pagination');
+        $audios = Audio::latest()->with(['tags', 'categories' , 'owner'])->paginate(10 , ['*'] , 'audio_pagination');
+        $videos = Video::latest()->with(['tags', 'categories' , 'owner'])->paginate(10 , ['*'] , 'video_pagination');
         $tags = Tag::latest()->paginate(10);
         $categories = Category::latest()->get();
 

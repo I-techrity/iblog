@@ -12,7 +12,11 @@ Feed
             <div class="my-3">
                 articles
                 <br>
-                {{ dump($articles) }}
+                
+                @foreach ($articles as $article)
+                        {{ $article }}
+                @endforeach                
+                {{ $articles->appends(Arr::except(Request::query(), 'article_pagination'))->links() }}
              </div>
 
              <div class="my-3">

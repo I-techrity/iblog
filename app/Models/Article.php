@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 class Article extends Model
 {
     use HasFactory;
-
+    protected $guarde = [];
     public function owner()
     {
         return $this->belongsTo(User::class , 'user_id');

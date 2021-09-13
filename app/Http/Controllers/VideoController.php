@@ -15,7 +15,6 @@ class VideoController extends Controller
     public function index()
     {
         return view('videos.index' , ['videos'=> Video::where('approved' , true)->latest()->paginate(10)]);
-
     }
 
     /**

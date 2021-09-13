@@ -1443,6 +1443,22 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{}',
                 'order' => 7,
             ),
+            89 => 
+            array (
+                'id' => 125,
+                'data_type_id' => 1,
+                'field' => 'bio',
+                'type' => 'text',
+                'display_name' => 'Bio',
+                'required' => 0,
+                'browse' => 1,
+                'read' => 1,
+                'edit' => 1,
+                'add' => 1,
+                'delete' => 1,
+                'details' => '{}',
+                'order' => 7,
+            ),
         ));
         
         

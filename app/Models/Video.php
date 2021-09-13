@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 class Video extends Model
 {
     use HasFactory;
-
+    protected $guarded = [] ;
     protected $appends = ['link'];
     public function getLinkAttribute() {
         return '/storage/'.json_decode($this->file)[0]->download_link;
